@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "FastFoodApp",
-    "slug": "FastFoodApp",
+    "name": "Food Ordering App",
+    "slug": "Food Ordering App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "fastfoodapp",
+    "scheme": "Food Ordering App",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
