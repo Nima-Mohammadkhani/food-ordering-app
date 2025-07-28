@@ -7,7 +7,7 @@ interface InputProps extends TextInputProps {
   error?: string;
   leftIcon?: keyof typeof Ionicons.glyphMap;
   rightIcon?: keyof typeof Ionicons.glyphMap;
-  secureToggle?: boolean; // برای پسورد
+  secureToggle?: boolean;
   containerClassName?: string;
   inputClassName?: string;
 }
