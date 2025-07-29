@@ -1,16 +1,18 @@
 import Button from "@/components/ui/Button";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  SafeAreaView,
-  StatusBar,
   Image,
   ImageSourcePropType,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  View,
 } from "react-native";
 
 const Index = () => {
   const [step, setStep] = useState<number>(0);
+  const router = useRouter();
   const onboarding: {
     title: string;
     description: string;
@@ -19,7 +21,7 @@ const Index = () => {
     {
       title: "Discover top restaurants near you",
       description:
-        "Browse a wide range of local favorites and hidden gems. Find the food you love, fast and easy.",
+        "Browse a wide range of local favorites and hidden gems. Find the food you love.",
       image: require("../../assets/images/onboarding/onboarding.png"),
     },
     {
@@ -39,11 +41,7 @@ const Index = () => {
   const current = onboarding[step];
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent={true}
-      />
+      <StatusBar />
       <View className="relative flex-1">
         <Image
           source={current.image}
@@ -52,8 +50,7 @@ const Index = () => {
         />
         <View className="absolute bottom-0 p-10">
           <View
-            className="flex flex-col gap-5 p-6 rounded-3xl shadow-lg"
-            style={{ backgroundColor: "#FE8C00" }}
+            className="flex flex-col gap-5 p-6 rounded-3xl shadow-lg bg-[#FE8C00]"
           >
             <Text className="text-white text-3xl font-semibold text-center mb-3">
               {current.title}
@@ -61,11 +58,11 @@ const Index = () => {
             <Text className="text-white text-base text-center mb-6 leading-6">
               {current.description}
             </Text>
-            <View className="flex-row justify-center mt-4 space-x-2">
+            <View className="flex-row justify-center gap-2 mt-4 space-x-2">
               {onboarding.map((_, index) => (
                 <View
                   key={index}
-                  className={`w-2 h-2 rounded-full ${
+                  className={`w-4 h-2 rounded-lg ${
                     step === index ? "bg-white" : "bg-orange-300"
                   }`}
                 />
@@ -95,6 +92,8 @@ const Index = () => {
                 onPress={() => {
                   if (step < onboarding.length - 1) {
                     setStep((prev) => prev + 1);
+                  } else {
+                    router.push("/auth/login");
                   }
                 }}
               />

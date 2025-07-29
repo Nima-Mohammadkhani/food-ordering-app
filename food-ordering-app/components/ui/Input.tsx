@@ -32,7 +32,7 @@ const Input = ({
 
       <View
         className={`flex-row items-center border rounded-lg px-3 ${
-          isFocused ? "border-blue-600" : "border-gray-300"
+          isFocused ? "border" : "border-gray-300"
         } ${error ? "border-red-500" : ""}`}
       >
         {leftIcon && (
