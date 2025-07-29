@@ -80,7 +80,7 @@ const Index = () => {
                 title="Back"
                 iconLeft="arrow-back"
                 variant="primary"
-                className={`bg-transparent py-3 ${
+                className={`bg-transparent py-3 px-0 ${
                   step == 0 ? "hidden" : "block"
                 }`}
                 textClassName="text-orange-500 font-bold"
@@ -90,7 +90,7 @@ const Index = () => {
                 title="Next"
                 iconRight="arrow-forward"
                 variant="primary"
-                className="bg-transparent py-3 "
+                className="bg-transparent py-3 px-0"
                 textClassName="text-orange-500 font-bold"
                 onPress={() => {
                   if (step < onboarding.length - 1) {
