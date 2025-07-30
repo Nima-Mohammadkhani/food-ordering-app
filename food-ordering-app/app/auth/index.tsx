@@ -76,19 +76,17 @@ const Index = () => {
               <Button
                 title="Back"
                 iconLeft="arrow-back"
-                variant="primary"
-                className={`bg-transparent py-3 px-0 ${
+                className={`bg-transparent text-white ${
                   step == 0 ? "hidden" : "block"
                 }`}
-                textClassName="text-orange-500 font-bold"
+                textClassName="text-white font-bold"
                 onPress={() => setStep((prev) => prev - 1)}
               />
               <Button
                 title="Next"
                 iconRight="arrow-forward"
-                variant="primary"
-                className="bg-transparent py-3 px-0"
-                textClassName="text-orange-500 font-bold"
+                className="bg-transparent text-white"
+                textClassName="text-white font-bold"
                 onPress={() => {
                   if (step < onboarding.length - 1) {
                     setStep((prev) => prev + 1);

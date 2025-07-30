@@ -111,6 +111,8 @@ const ForgotPassword = () => {
           <View className="pb-6 pt-4">
             <Button
               title="Continue"
+              size="md"
+              textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"
               onPress={handleContinue}
             />
@@ -128,7 +130,7 @@ const ForgotPassword = () => {
           className="flex-1 bg-black/30"
           onPress={() => setModalVisible(false)}
         />
-        <View className="absolute bottom-0 w-full bg-white rounded-t-3xl p-6">
+        <View className="flex flex-col gap-2 absolute bottom-0 w-full bg-white rounded-t-3xl p-6">
           <Text className="text-lg font-bold text-black mb-2">
             Forgot password?
           </Text>
@@ -151,7 +153,9 @@ const ForgotPassword = () => {
 
           <Button
             title="Continue"
-            className="bg-[#FE8C00] rounded-full mt-4"
+            size="md"
+            textClassName="text-white"
+            className="bg-[#FE8C00] text-white rounded-full"
             onPress={() => {
               setModalVisible(false);
             }}

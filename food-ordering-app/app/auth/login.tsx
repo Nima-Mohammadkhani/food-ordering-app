@@ -35,7 +35,7 @@ const Login = () => {
           >
             Forgot password?
           </Text>
-          <Button title="Sign In" className="bg-[#FE8C00] rounded-full mt-2" />
+          <Button title="Sign In" size="md" textClassName="text-white" className="bg-[#FE8C00] rounded-full" />
         </View>
 
         <View className="flex-row items-center">

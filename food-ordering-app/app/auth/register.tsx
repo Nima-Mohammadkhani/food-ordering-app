@@ -40,7 +40,7 @@ const Register = () => {
             value={password}
             onChangeText={setUserName}
           />
-          <View className="flex flex-row justify-center items-center">
+          <View className="flex flex-row justify-between items-center">
             <TouchableOpacity
               className="flex-row items-center gap-2"
               onPress={() => setChecked(!checked)}
@@ -52,13 +52,13 @@ const Register = () => {
                 color={checked ? "#FE8C00" : "#999"}
               />
             </TouchableOpacity>
-            <Text className="text-right text-m">
+            <Text className="text-right">
               I Agree with{" "}
               <Text className="text-[#FE8C00]">Terms of Service</Text> and{" "}
               <Text className="text-[#FE8C00]">Privacy Policy</Text>
             </Text>
           </View>
-          <Button title="Sign In" className="bg-[#FE8C00] rounded-full mt-2" />
+            <Button title="Sign In" size="md" textClassName="text-white" className="bg-[#FE8C00] rounded-full mt-2" />
         </View>
 
         <View className="flex-row items-center">
@@ -77,11 +77,6 @@ const Register = () => {
           <View className="w-10 h-10 rounded-full bg-gray-100 items-center justify-center">
             <Ionicons name="logo-apple" size={20} color="#000000" />
           </View>
-        </View>
-
-        <View className="flex-row justify-center gap-1">
-          <Text>Don't have an account?</Text>
-          <Text className="text-[#FE8C00] font-medium">Register</Text>
         </View>
       </View>
     </SafeAreaView>

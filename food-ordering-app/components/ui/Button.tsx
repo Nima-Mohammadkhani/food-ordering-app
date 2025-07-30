@@ -13,8 +13,8 @@ import { Ionicons } from "@expo/vector-icons";
 interface ButtonProps {
   title?: string;
   onPress?: () => void;
-  variant?: "primary" | "secondary" | "outline";
-  size?: "sm" | "md" | "lg";
+  variant?: string;
+  size?: string;
   className?: string;
   textClassName?: string;
   disabled?: boolean;
@@ -28,8 +28,8 @@ interface ButtonProps {
 const Button = ({
   title,
   onPress,
-  variant = "primary",
-  size = "md",
+  variant = "",
+  size = "",
   className = "",
   textClassName = "",
   disabled = false,
