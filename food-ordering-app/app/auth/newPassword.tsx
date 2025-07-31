@@ -66,7 +66,7 @@ const NewPassword = () => {
               size="md"
               textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"
-              onPress={() => router.push("/auth/newPassword")}
+              onPress={() => router.push("/auth/login")}
             />
           </View>
         </KeyboardAvoidingView>
