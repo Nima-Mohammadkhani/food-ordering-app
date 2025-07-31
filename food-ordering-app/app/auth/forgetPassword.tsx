@@ -14,12 +14,13 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-
+import { useRouter } from "expo-router";
 const ForgotPassword = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedMethod, setSelectedMethod] = useState<"whatsapp" | "email">(
     "whatsapp"
   );
+  const router = useRouter();
 
   const inputRef = useRef(null);
 
@@ -158,6 +159,7 @@ const ForgotPassword = () => {
             className="bg-[#FE8C00] text-white rounded-full"
             onPress={() => {
               setModalVisible(false);
+              router.push("/auth/otp");
             }}
           />
         </View>
