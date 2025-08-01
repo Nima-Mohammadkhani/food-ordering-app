@@ -45,7 +45,7 @@ const RootLayout = () => {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {!isLoggedIn ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
+      {isLoggedIn ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
       <Stack>
         <Stack.Screen name="auth" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

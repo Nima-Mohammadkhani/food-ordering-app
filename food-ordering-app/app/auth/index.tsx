@@ -41,7 +41,7 @@ const Index = () => {
   const current = onboarding[step];
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar />
+      <StatusBar hidden/>
       <View className="relative flex-1">
         <Image
           source={current.image}
