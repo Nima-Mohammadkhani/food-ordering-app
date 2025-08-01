@@ -16,10 +16,7 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
 const ForgotPassword = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [selectedMethod, setSelectedMethod] = useState<"whatsapp" | "email">(
-    "whatsapp"
-  );
+  const [email, setEmail] = useState<string>("");
   const router = useRouter();
 
   const inputRef = useRef(null);
@@ -33,43 +30,6 @@ const ForgotPassword = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleContinue = () => {
-    setModalVisible(true);
-  };
-
-  const renderOption = (
-    type: "whatsapp" | "email",
-    label: string,
-    value: string,
-    iconName: keyof typeof Ionicons.glyphMap
-  ) => {
-    const isSelected = selectedMethod === type;
-
-    return (
-      <TouchableOpacity
-        className={`flex-row items-center justify-between border rounded-xl px-4 py-3 mb-2 ${
-          isSelected ? "border-[#FE8C00] bg-orange-50" : "border-gray-300"
-        }`}
-        onPress={() => setSelectedMethod(type)}
-      >
-        <View className="flex-row items-center gap-4">
-          <Ionicons
-            name={iconName}
-            size={24}
-            color={isSelected ? "#FE8C00" : "#999"}
-          />
-          <View>
-            <Text className="text-sm text-gray-500">{label}</Text>
-            <Text className="font-semibold text-black">{value}</Text>
-          </View>
-        </View>
-        {isSelected && (
-          <Ionicons name="checkmark-circle" size={24} color="#FE8C00" />
-        )}
-      </TouchableOpacity>
-    );
-  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -95,6 +55,8 @@ const ForgotPassword = () => {
             <View>
               <Input
                 label="Email Address"
+                value={email}
+                onChangeText={setEmail}
                 ref={inputRef}
                 autoFocus={true}
                 keyboardType="email-address"
@@ -115,55 +77,13 @@ const ForgotPassword = () => {
               size="md"
               textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"
-              onPress={handleContinue}
+              onPress={() => {
+                router.push("/auth/otp");
+              }}
             />
           </View>
         </KeyboardAvoidingView>
       </View>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <Pressable
-          className="flex-1 bg-black/30"
-          onPress={() => setModalVisible(false)}
-        />
-        <View className="flex flex-col gap-2 absolute bottom-0 w-full bg-white rounded-t-3xl p-6">
-          <Text className="text-lg font-bold text-black mb-2">
-            Forgot password?
-          </Text>
-          <Text className="text-sm text-gray-500 mb-4">
-            Select which contact details should we use to reset your password
-          </Text>
-
-          {renderOption(
-            "whatsapp",
-            "Send via WhatsApp",
-            "+12 8347 2838 28",
-            "logo-whatsapp"
-          )}
-          {renderOption(
-            "email",
-            "Send via Email",
-            "Albertstevano@gmail.com",
-            "mail-outline"
-          )}
-
-          <Button
-            title="Continue"
-            size="md"
-            textClassName="text-white"
-            className="bg-[#FE8C00] text-white rounded-full"
-            onPress={() => {
-              setModalVisible(false);
-              router.push("/auth/otp");
-            }}
-          />
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 };

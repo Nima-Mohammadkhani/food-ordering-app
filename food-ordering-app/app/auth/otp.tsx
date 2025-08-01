@@ -51,11 +51,11 @@ const Otp = () => {
           <View className="flex-1 justify-center gap-6">
             <View>
               <Text className="text-4xl font-bold text-black mb-2">
-                Forgot password?
+                Email verification
               </Text>
               <Text className="text-base text-gray-500">
-                Enter your email address and we'll send you confirmation code to
-                reset your password
+                Enter the verification code we send you on:
+                Alberts******@gmail.com|
               </Text>
             </View>
 
