@@ -1,4 +1,4 @@
-import { View, Text, Image, ImageSourcePropType } from "react-native";
+import { View, Text, Image, ImageSourcePropType, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "./ui/Button";
 
@@ -12,32 +12,63 @@ interface ProductItem {
   price: number;
 }
 
+const { width: screenWidth } = Dimensions.get('window');
+const cardWidth = (screenWidth - 48) / 2;
+
 const ProductCart = ({item}: {item: ProductItem}) => {
   return (
-    <View className="bg-white rounded-lg p-3 shadow-sm border border-gray-100">
+    <View 
+      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+      style={{
+        width: cardWidth,
+        minHeight: 220,
+      }}
+    >
       <View className="relative">
         <Image
           source={item.image}
-          className="w-full h-32 rounded-md"
+          className="w-full rounded-t-xl"
+          style={{
+            height: cardWidth * 0.6,
+          }}
           resizeMode="cover"
         />
-        <View className="flex justify-center items-center absolute top-2 right-2 bg-white p-1 rounded-full shadow-sm">
-          <Ionicons name="heart-outline" size={20} color="red" />
+        <View className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
+          <Ionicons name="heart-outline" size={16} color="red" />
         </View>
       </View>
-      <View className="flex gap-2 mt-2">
-        <Text className="font-medium text-base" numberOfLines={1}>{item.name}</Text>
-        <View className="flex flex-row justify-between items-center">
-          <Text className="font-medium text-sm">
-            <Ionicons name="star" color={"orange"} size={14} />
-            {item.like}
+      
+      <View className="p-3 flex-1 justify-around">
+        <View className="flex gap-4">
+          <Text 
+            className="font-semibold text-sm text-gray-800" 
+            numberOfLines={2}
+            style={{ lineHeight: 18 }}
+          >
+            {item.name}
           </Text>
-          <Text className="font-medium text-sm">
-            <Ionicons name="map-outline" color={"orange"} size={14} />
-            {item.map}m
+          
+          <View className="flex flex-row justify-between items-center">
+            <View className="flex flex-row items-center gap-1">
+              <Ionicons name="star" color="orange" size={12} />
+              <Text className="font-medium text-xs text-gray-600">
+                {item.like}
+              </Text>
+            </View>
+            <View className="flex flex-row items-center gap-1">
+              <Ionicons name="location-outline" color="orange" size={12} />
+              <Text className="font-medium text-xs text-gray-600">
+                {item.map}m
+              </Text>
+            </View>
+          </View>
+        </View>
+        
+        <View className="mt-2">
+          <Text className="text-[#FE8C00] font-bold text-base">
+            ${item.price.toFixed(2)}
           </Text>
         </View>
-        <Text className="text-[#FE8C00] font-bold text-lg">${item.price}</Text>
       </View>
     </View>
   );

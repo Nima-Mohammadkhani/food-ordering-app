@@ -18,7 +18,7 @@ const Slider = () => {
               title="Your Location"
             />
             <Button
-              iconLeft="map-outline"
+              iconLeft="location-outline"
               textClassName="text-white"
               title="tehran"
               className="justify-between"

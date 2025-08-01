@@ -94,13 +94,7 @@ const HomeScreen = () => {
   };
 
   const renderProduct = ({ item, index }: { item: Product; index: number }) => {
-    const isEven = index % 2 === 0;
-
-    return (
-      <View className="mt-2 w-[48%]">
-        <ProductCart item={item} />
-      </View>
-    );
+    return <ProductCart item={item} />;
   };
 
   return (
@@ -125,6 +119,11 @@ const HomeScreen = () => {
           columnWrapperStyle={{
             justifyContent: "space-between",
             paddingHorizontal: 16,
+            gap: 16,
+          }}
+          contentContainerStyle={{
+            paddingTop: 16,
+            gap: 16,
           }}
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
