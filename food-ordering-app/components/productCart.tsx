@@ -1,5 +1,6 @@
-import { View, Text, Image, ImageSourcePropType, Dimensions } from "react-native";
+import { View, Text, Image, ImageSourcePropType, Dimensions, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import Button from "./ui/Button";
 
 interface ProductItem {
@@ -16,8 +17,15 @@ const { width: screenWidth } = Dimensions.get('window');
 const cardWidth = (screenWidth - 48) / 2;
 
 const ProductCart = ({item}: {item: ProductItem}) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push(`/product/${item.id}`);
+  };
+
   return (
-    <View 
+    <Pressable
+      onPress={handlePress}
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
       style={{
         width: cardWidth,
@@ -70,7 +78,7 @@ const ProductCart = ({item}: {item: ProductItem}) => {
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
