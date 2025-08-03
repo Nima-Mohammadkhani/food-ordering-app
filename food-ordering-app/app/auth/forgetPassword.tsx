@@ -32,7 +32,7 @@ const ForgotPassword = () => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
 
       <View className="flex-1 px-6">

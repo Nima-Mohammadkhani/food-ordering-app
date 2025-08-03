@@ -52,6 +52,12 @@ export default function TabsLayout() {
           href: null,
         }}
       />
+      <Tabs.Screen
+        name="chat/[userId]"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

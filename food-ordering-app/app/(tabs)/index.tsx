@@ -98,7 +98,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <ScrollView
         className="flex-1"

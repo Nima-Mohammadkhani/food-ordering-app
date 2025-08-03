@@ -15,7 +15,7 @@ const Register = () => {
   const [password, setPassword] = useState<string | undefined>();
   const [checked, setChecked] = useState(false);
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
         <View className="mb-6">
