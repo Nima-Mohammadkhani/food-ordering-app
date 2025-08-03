@@ -51,15 +51,7 @@ const HomeScreen = () => {
   const router = useRouter();
 
   const renderItem = ({ item }: { item: IChat }) => (
-    <ChatCard
-      id={item.id}
-      name={item.name}
-      avatar={item.avatar}
-      lastMessage={item.lastMessage}
-      time={item.time}
-      read={item.read}
-      onPress={() => router.push(`/chat/${item.id}`)}
-    />
+    <ChatCard item={item} onPress={() => router.push(`/chat/${item.id}`)} />
   );
 
   return (
