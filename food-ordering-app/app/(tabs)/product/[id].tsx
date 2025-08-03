@@ -13,6 +13,7 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "@/components/ui/Button";
+import Header from "@/components/ui/header";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -179,24 +180,7 @@ const ProductDetailScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar hidden />
-
-      <View className="flex-row items-center justify-between px-4 pt-10 bg-white">
-        <Pressable
-          onPress={() => router.back()}
-          className="p-2 rounded-full bg-gray-50"
-        >
-          <Ionicons name="chevron-back" size={24} color="#000" />
-        </Pressable>
-
-        <Text className="text-lg font-semibold text-gray-800">
-          About This Menu
-        </Text>
-
-        <Pressable className="p-2 rounded-full bg-gray-50">
-          <Ionicons name="share-outline" size={24} color="#000" />
-        </Pressable>
-      </View>
-
+      <Header title={product.name} />
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
         <View className="px-4 mt-4">
           <View className="relative rounded-2xl overflow-hidden">
