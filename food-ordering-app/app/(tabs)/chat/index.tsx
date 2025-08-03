@@ -1,4 +1,4 @@
-import { View, SafeAreaView, FlatList, StatusBar } from "react-native";
+import { View, SafeAreaView, FlatList, StatusBar, ImageBackground } from "react-native";
 import { useRouter } from "expo-router";
 import Header from "@/components/ui/header";
 import ChatCard from "@/components/ChatCard";
@@ -55,16 +55,24 @@ const HomeScreen = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
-      <Header title="Chat List" />
-      <FlatList
-        data={chats}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ padding: 16 }}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
-      />
+      <ImageBackground
+        source={require("@/assets/images/Pattern.png")}
+        className="flex-1"
+        resizeMode="cover"
+      >
+        <View className="flex-1 bg-white/40">
+          <Header title="Chat List" />
+          <FlatList
+            data={chats}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ padding: 16 }}
+            showsVerticalScrollIndicator={false}
+            renderItem={renderItem}
+          />
+        </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

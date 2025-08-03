@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Header from "@/components/ui/header";
+import Input from "@/components/ui/Input";
 
 interface IMessage {
   id: string;
@@ -107,10 +109,10 @@ const ChatScreen = () => {
         }`}
       >
         <View
-          className={`max-w-4/5 p-3 rounded-2xl ${
+          className={`max-w-4/5 p-3 rounded-2xl shadow-md ${
             item.isUser
               ? "bg-[#FE8C00] rounded-br-md"
-              : "bg-white border border-gray-300 rounded-bl-md"
+              : "bg-white/95 border border-gray-200 rounded-bl-md backdrop-blur-sm"
           }`}
         >
           <Text
@@ -167,53 +169,67 @@ const ChatScreen = () => {
 
   return (
     <SafeAreaView className="flex-1">
-    <Header title="Chat" />
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={90}
+      <ImageBackground
+        source={require("@/assets/images/Pattern.png")}
+        className="flex-1"
+        resizeMode="cover"
       >
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
-          showsVerticalScrollIndicator={false}
-        />
-
-        {isTyping && (
-          <View className="px-4 py-2">
-            <Text className="text-gray-400">Typing...</Text>
-          </View>
-        )}
-
-        <View className="flex-row items-center px-4 py-3 border-t border-gray-300 bg-white">
-          <TextInput
-            className="flex-1 bg-white border border-gray-300 text-black rounded-2xl px-4 py-3 text-base"
-            placeholder="Write your message..."
-            placeholderTextColor="rgba(0,0,0,0.4)"
-            value={message}
-            onChangeText={(text) => {
-              setMessage(text);
-              setIsTyping(text.length > 0);
-            }}
-            onSubmitEditing={sendMessage}
-            returnKeyType="send"
-          />
-          <TouchableOpacity
-            onPress={sendMessage}
-            disabled={!message.trim()}
-            className={`ml-3 rounded-full p-3 ${
-              message.trim()
-                ? "bg-[#FE8C00] shadow-lg"
-                : "bg-gray-300 opacity-50"
-            }`}
+        <View className="flex-1 bg-white/20">
+          <Header title="Chat" />
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
           >
-            <Ionicons name="send" size={24} color="white" />
-          </TouchableOpacity>
+            <FlatList
+              ref={flatListRef}
+              data={messages}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
+              showsVerticalScrollIndicator={false}
+            />
+
+            {isTyping && (
+              <View className="px-4 py-2">
+                <View className="bg-white/80 rounded-lg px-3 py-2 self-start">
+                  <Text className="text-gray-600">Typing...</Text>
+                </View>
+              </View>
+            )}
+
+            <View className="px-4 border-t border-gray-300/50 bg-white/95">
+              <View className="flex-row justify-center items-center gap-3">
+                <View className="flex-1">
+                  <Input
+                    containerClassName="mb-0 mt-4"
+                    placeholder="Write your message..."
+                    value={message}
+                    onChangeText={(text) => {
+                      setMessage(text);
+                      setIsTyping(text.length > 0);
+                    }}
+                    onSubmitEditing={sendMessage}
+                    returnKeyType="send"
+                    multiline={false}
+                  />
+                </View>
+                <TouchableOpacity
+                  onPress={sendMessage}
+                  disabled={!message.trim()}
+                  className={`rounded-full p-3 shadow-lg ${
+                    message.trim()
+                      ? "bg-[#FE8C00]"
+                      : "bg-gray-300 opacity-50"
+                  }`}
+                >
+                  <Ionicons name="send" size={24} color="white" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
         </View>
-      </KeyboardAvoidingView>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
