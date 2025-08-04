@@ -1,5 +1,5 @@
 import Category from "@/components/category";
-import ProductCart from "@/components/productCart";
+import ProductCart from "@/components/productCard";
 import Slider from "@/components/slider";
 import {
   SafeAreaView,

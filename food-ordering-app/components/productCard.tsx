@@ -26,7 +26,7 @@ const ProductCart = ({item}: {item: ProductItem}) => {
   return (
     <Pressable
       onPress={handlePress}
-      className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+      className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
       style={{
         width: cardWidth,
         minHeight: 220,
