@@ -1,7 +1,7 @@
-import { View, Image, Text } from "react-native";
+import { Text, Image, View } from "react-native";
 import Button from "./ui/Button";
 import { useRouter } from "expo-router";
-const EmptyCartScreen = () => {
+const EmptyCartView = () => {
   const router = useRouter();
   return (
     <View className="flex-1 flex justify-center items-center gap-4">
@@ -25,4 +25,4 @@ const EmptyCartScreen = () => {
     </View>
   );
 };
-export default EmptyCartScreen;
+export default EmptyCartView;
