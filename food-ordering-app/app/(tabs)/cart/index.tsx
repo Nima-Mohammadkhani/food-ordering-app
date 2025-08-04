@@ -5,6 +5,7 @@ import ProductCard from "@/components/cartProductCard";
 import React, { useState } from "react";
 import { View, Text, SafeAreaView, StatusBar, ScrollView } from "react-native";
 import Input from "@/components/ui/Input";
+import { useRouter } from "expo-router";
 
 interface CartItem {
   id: string;
@@ -42,7 +43,7 @@ const CartScreen = () => {
       selected: true,
     },
   ]);
-
+  const router = useRouter();
   const handleIncrement = (id: string) => {
     setCartItems((prev: CartItem[]) =>
       prev.map((item: CartItem) =>
@@ -109,6 +110,7 @@ const CartScreen = () => {
 
           {cartItems.map((item) => (
             <ProductCard
+              key={item.id}
               item={item}
               onIncrement={handleIncrement}
               onDecrement={handleDecrement}
@@ -142,6 +144,13 @@ const CartScreen = () => {
                 ${finalTotal.toLocaleString()}
               </Text>
             </View>
+            <Button
+              title="Pay"
+              size="md"
+              textClassName="text-white"
+              className="bg-[#FE8C00] rounded-full"
+              onPress={() => router.push("/(tabs)/cart/map")}
+            />
           </View>
         </ScrollView>
       )}
