@@ -93,11 +93,11 @@ const LiveDeliveryMap = () => {
           <Text className="font-semibold mb-1">Your Delivery Time</Text>
           <Text className="text-sm mb-2">Estimated 8:30 - 9:15 PM</Text>
 
-          <View className="flex-row items-center">
+          <View className="flex-row justify-between items-center">
             <MaterialIcons name="restaurant" size={20} color="orange" />
-            <View className="w-5 h-px bg-gray-300 mx-1" />
+            <View className="w-28 h-px bg-gray-300 mx-1" />
             <MaterialIcons name="shopping-bag" size={20} color="orange" />
-            <View className="w-5 h-px bg-gray-300 mx-1" />
+            <View className="w-28 h-px bg-gray-300 mx-1" />
             <MaterialIcons name="motorcycle" size={20} color="orange" />
           </View>
         </View>
