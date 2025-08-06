@@ -8,7 +8,8 @@ import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import "../global.css";
-
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useState, useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
@@ -44,15 +45,17 @@ const RootLayout = () => {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {isLoggedIn ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
-      <Stack>
-        <Stack.Screen name="auth" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar hidden/>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        {!isLoggedIn ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
+        <Stack>
+          <Stack.Screen name="auth" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar hidden />
+      </ThemeProvider>
+    </Provider>
   );
 };
 export default RootLayout;
