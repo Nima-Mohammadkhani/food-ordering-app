@@ -13,7 +13,7 @@ import { store } from "@/redux/store";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useState, useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
-
+import Toast from "react-native-toast-message";
 const RootLayout = () => {
   const colorScheme = useColorScheme();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
@@ -55,6 +55,7 @@ const RootLayout = () => {
         </Stack>
         <StatusBar hidden />
       </ThemeProvider>
+      <Toast />
     </Provider>
   );
 };
