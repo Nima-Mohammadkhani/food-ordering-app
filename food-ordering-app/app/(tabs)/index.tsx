@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import { useState } from "react";
-
+import { useSelector } from "react-redux";
 interface Product {
   id: number;
   image: any;
@@ -96,7 +96,8 @@ const HomeScreen = () => {
   const renderProduct = ({ item, index }: { item: Product; index: number }) => {
     return <ProductCart item={item} />;
   };
-
+const user = useSelector((state) => state.auth.user);
+console.log(user);
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />

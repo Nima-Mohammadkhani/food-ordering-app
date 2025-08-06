@@ -1,6 +1,8 @@
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { login } from "@/redux/slice/auth";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   SafeAreaView,
@@ -9,11 +11,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Toast from "react-native-toast-message";
+import { useDispatch } from "react-redux";
 const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const [checked, setChecked] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const registerUser = async () => {
+    await dispatch(login({ email, userName, password, isRegistered: "true" }));
+    Toast.show({ type: "success", text1: "Register success" });
+    router.replace("/(tabs)");
+  };
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
@@ -38,7 +49,7 @@ const Register = () => {
             secureToggle
             secureTextEntry
             value={password}
-            onChangeText={setUserName}
+            onChangeText={setPassword}
           />
           <View className="flex flex-row justify-between items-center">
             <TouchableOpacity
@@ -58,12 +69,21 @@ const Register = () => {
               <Text className="text-[#FE8C00]">Privacy Policy</Text>
             </Text>
           </View>
-            <Button title="Sign In" size="md" textClassName="text-white" className="bg-[#FE8C00] rounded-full mt-2" />
+          <Button
+            title="Register"
+            size="md"
+            textClassName="text-white"
+            disabled={!(email && userName && password && checked)}
+            className="bg-[#FE8C00] rounded-full mt-2"
+            onPress={registerUser}
+          />
         </View>
 
         <View className="flex-row items-center">
           <View className="flex-1 h-px bg-neutral-300" />
-          <Text className="mx-4 text-neutral-500 text-sm">Or sign in with</Text>
+          <Text className="mx-4 text-neutral-500 text-sm">
+            Or Register with
+          </Text>
           <View className="flex-1 h-px bg-neutral-300" />
         </View>
 

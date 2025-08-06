@@ -8,35 +8,20 @@ import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import "../global.css";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "@/redux/store";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { useState, useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-const RootLayout = () => {
+
+function RootLayoutInner() {
   const colorScheme = useColorScheme();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const user = useSelector((state) => state.auth.user);
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      setTimeout(() => {
-        setIsLoggedIn(false);
-      }, 1000);
-    } catch (error) {
-      console.error("Error checking auth status:", error);
-      setIsLoggedIn(false);
-    }
-  };
-
-  if (!loaded || isLoggedIn === null) {
+  if (!loaded === null) {
     return (
       <View className="flex-1 justify-center items-center">
         <ActivityIndicator size="large" />
@@ -45,18 +30,23 @@ const RootLayout = () => {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {!isLoggedIn ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
-        <Stack>
-          <Stack.Screen name="auth" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar hidden />
-      </ThemeProvider>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      {!user ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
+      <Stack>
+        <Stack.Screen name="auth" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+      <StatusBar hidden />
       <Toast />
+    </ThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <Provider store={store}>
+      <RootLayoutInner />
     </Provider>
   );
-};
-export default RootLayout;
+}
