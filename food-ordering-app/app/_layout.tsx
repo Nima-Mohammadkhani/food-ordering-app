@@ -1,45 +1,42 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { Redirect, Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
-import "../global.css";
-import { Provider, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "@/redux/slice/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Stack, Redirect } from "expo-router";
+import { Provider } from "react-redux";
 import { store } from "@/redux/store";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { View, ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-
+import { StatusBar } from "react-native";
+import { useFonts } from "expo-font";
+import "../global.css";
 function RootLayoutInner() {
-  const colorScheme = useColorScheme();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const [loaded] = useFonts({
+  useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+  useEffect(() => {
+    const loadUserData = async () => {
+      const userData = await AsyncStorage.getItem("user");
+      if (userData) {
+        dispatch(loadUser(JSON.parse(userData)));
+      }
+    };
 
-  if (!loaded === null) {
-    return (
-      <View className="flex-1 justify-center items-center">
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+    loadUserData();
+  }, [dispatch]);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <>
       {!user ? <Redirect href="/auth" /> : <Redirect href="/(tabs)" />}
       <Stack>
-        <Stack.Screen name="auth" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="auth" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar hidden />
       <Toast />
-    </ThemeProvider>
+    </>
   );
 }
 

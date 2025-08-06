@@ -10,10 +10,14 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { useRouter } from "expo-router";
+import Toast from "react-native-toast-message";
 
 import Button from "@/components/ui/Button";
 import Header from "@/components/ui/header";
 import Input from "@/components/ui/Input";
+import { logout } from "@/redux/slice/auth";
 
 const ProfileScreen = () => {
   const [profileImage, setProfileImage] = useState(null);
@@ -24,6 +28,15 @@ const ProfileScreen = () => {
     phone: "",
     email: "",
   });
+  
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    Toast.show({ type: "success", text1: "Logged out successfully" });
+    router.replace("/auth");
+  };
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -51,8 +64,8 @@ const ProfileScreen = () => {
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <Header title="Profile" />
-      <ScrollView className="flex-1 p-6">
-        <View className="flex gap-4 py-5">
+      <ScrollView className="flex-1 p-6" showsVerticalScrollIndicator={false}>
+        <View className="flex gap-4">
           <View className="flex justify-center items-center self-center relative bg-white size-32 border rounded-full">
             {profileImage ? (
               <Image source={{ uri: profileImage }} className="w-full h-full rounded-full" />
@@ -112,6 +125,14 @@ const ProfileScreen = () => {
               console.log("Saved user info:", user);
               alert("Profile Saved!");
             }}
+          />
+          
+          <Button
+            title="Logout"
+            size="md"
+            textClassName="text-white"
+            className="bg-red-500 rounded-full"
+            onPress={handleLogout}
           />
         </View>
       </ScrollView>

@@ -7,20 +7,29 @@ import { SafeAreaView, StatusBar, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import { login } from "@/redux/slice/auth";
+
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const loading = useSelector((state) => state.auth.loading);
+
   const loginUser = async () => {
     if (user && user.isRegistered) {
-      await dispatch(login({ username, password }));
-      Toast.show({ type: "success", text1: "Login success" });
-      router.replace("/(tabs)");
+      if (user.userName === username && user.password === password) {
+        dispatch(login({ username, password, isRegistered: "true" }));
+        Toast.show({ type: "success", text1: "Login success" });
+        router.replace("/(tabs)");
+      } else {
+        Toast.show({ type: "error", text1: "Invalid username or password" });
+      }
+    } else {
+      Toast.show({ type: "error", text1: "Please register account first" });
     }
-    Toast.show({ type: "error", text1: "Please register account" });
   };
+
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
@@ -49,11 +58,11 @@ const Login = () => {
             Forgot password?
           </Text>
           <Button
-            title="login"
+            title={loading ? "Logging in..." : "Login"}
             size="md"
             textClassName="text-white"
             className="bg-[#FE8C00] rounded-full"
-            disabled={!(username && password)}
+            disabled={!(username && password) || loading}
             onPress={loginUser}
           />
         </View>
