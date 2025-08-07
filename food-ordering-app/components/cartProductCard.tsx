@@ -11,17 +11,10 @@ interface ProductCardProps {
     image: any;
     selected: boolean;
   };
-  onIncrement: (id: string) => void;
-  onDecrement: (id: string) => void;
-  onDelete: (id: string) => void;
+  removeFromCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  item,
-  onIncrement,
-  onDecrement,
-  onDelete,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ item, removeFromCart }) => {
   return (
     <View className="flex-row items-center border border-gray-200 bg-white rounded-lg p-4 mb-4 shadow-sm">
       <Image
@@ -59,7 +52,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </View>
       </View>
 
-      <TouchableOpacity onPress={() => onDelete(item.id)} className="ml-2">
+      <TouchableOpacity onPress={() => removeFromCart(item.id)} className="ml-2">
         <Ionicons name="trash-outline" size={20} color="#EF4444" />
       </TouchableOpacity>
     </View>

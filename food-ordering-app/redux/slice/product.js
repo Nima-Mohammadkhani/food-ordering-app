@@ -4,10 +4,20 @@ const product = createSlice({
   name: "product",
   initialState: {
     productList: mockProducts,
+    productCartList: [],
   },
-  reducers: {},
+  reducers: {
+    addItemToCart: (state, action) => {
+      state.productCartList = [...state.productCartList, action.payload];
+    },
+    removeItemFromCart: (state, action) => {
+      state.productCartList = state.productCartList.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+  },
 });
 
-export const { login, logout, loadUser } = product.actions;
+export const { addItemToCart, removeItemFromCart } = product.actions;
 
 export default product.reducer;

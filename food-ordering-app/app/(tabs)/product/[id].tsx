@@ -14,16 +14,19 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "@/components/ui/Button";
 import Header from "@/components/ui/header";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "@/redux/slice/product";
+import Toast from "react-native-toast-message";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 interface Product {
   id: number;
   image: any;
-  name: string;
+  title: string;
   category: string;
-  map: number;
-  like: number;
+  distance: number;
+  rating: number;
   price: number;
 }
 
@@ -35,66 +38,12 @@ const ProductDetailScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const allProducts: Product[] = [
-    {
-      id: 1,
-      image: require("../../../assets/images/food/1.png"),
-      name: "Ordinary Burgers",
-      category: "burger",
-      map: 190,
-      like: 4.9,
-      price: 17.29,
-    },
-    {
-      id: 2,
-      image: require("../../../assets/images/food/2.png"),
-      name: "Cheese Pizza",
-      category: "pizza",
-      map: 150,
-      like: 4.7,
-      price: 22.5,
-    },
-    {
-      id: 3,
-      image: require("../../../assets/images/food/3.png"),
-      name: "Fresh Juice",
-      category: "drink",
-      map: 80,
-      like: 4.8,
-      price: 8.99,
-    },
-    {
-      id: 4,
-      image: require("../../../assets/images/food/4.png"),
-      name: "Grilled Toast",
-      category: "toast",
-      map: 120,
-      like: 4.6,
-      price: 12.99,
-    },
-    {
-      id: 5,
-      image: require("../../../assets/images/food/2.png"),
-      name: "Double Burger",
-      category: "burger",
-      map: 200,
-      like: 4.9,
-      price: 19.99,
-    },
-    {
-      id: 6,
-      image: require("../../../assets/images/food/1.png"),
-      name: "Margherita Pizza",
-      category: "pizza",
-      map: 180,
-      like: 4.8,
-      price: 24.99,
-    },
-  ];
+  const productList = useSelector((state) => state.product.productList);
+  const dispatch = useDispatch();
 
-  const product = allProducts.find((p) => p.id === parseInt(id as string));
+  const product = productList.find((p) => p.id === parseInt(id as string));
 
-  const recommendedProducts = allProducts.filter(
+  const recommendedProducts = productList.filter(
     (p) => p.id !== parseInt(id as string)
   );
 
@@ -119,8 +68,9 @@ const ProductDetailScreen = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product.name} to cart`);
+  const handleAddToCart = async () => {
+    await dispatch(addItemToCart(product));
+    Toast.show({ type: "success", text1: "Added to cart" });
   };
 
   const handleProductPress = (productId: number) => {
@@ -148,14 +98,14 @@ const ProductDetailScreen = () => {
 
       <View className="p-2">
         <Text className="font-semibold text-sm text-gray-800" numberOfLines={1}>
-          {item.name}
+          {item.title}
         </Text>
 
         <View className="flex-row justify-between items-center mt-1">
           <View className="flex-row items-center gap-1">
             <Ionicons name="star" color="orange" size={10} />
             <Text className="font-medium text-xs text-gray-600">
-              {item.like}
+              {item.rating}
             </Text>
           </View>
           <Text className="text-[#FE8C00] font-bold text-sm">
@@ -180,7 +130,7 @@ const ProductDetailScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
-      <Header title={product.name} />
+      <Header title={product.title} />
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
         <View className="px-4 mt-4">
           <View className="relative rounded-2xl overflow-hidden">
@@ -207,7 +157,7 @@ const ProductDetailScreen = () => {
 
         <View className="px-4 mt-6">
           <Text className="text-2xl font-bold text-gray-800 mb-2">
-            {product.name} 🍔
+            {product.title} 🍔
           </Text>
 
           <Text className="text-2xl font-bold text-[#FE8C00] mb-4">
@@ -232,7 +182,7 @@ const ProductDetailScreen = () => {
             <View className="flex-row items-center bg-orange-50 px-3 py-2 rounded-lg">
               <Ionicons name="star" size={16} color="#FE8C00" />
               <Text className="text-[#FE8C00] font-medium ml-1 text-sm">
-                {product.like}
+                {product.rating}
               </Text>
             </View>
           </View>
@@ -242,8 +192,8 @@ const ProductDetailScreen = () => {
               Description
             </Text>
             <Text className="text-gray-600 leading-6">
-              {product.name} is a typical food from our restaurant that is much
-              in demand by many people, this is very recommended for you.
+              {product.title}
+              {product.description}
             </Text>
           </View>
 

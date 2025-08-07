@@ -13,22 +13,22 @@ import { useSelector } from "react-redux";
 interface Product {
   id: number;
   image: any;
-  name: string;
+  title: string;
   category: string;
-  map: number;
-  like: number;
+  distance: number;
+  rating: number;
   price: number;
 }
 
 const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const productList = useSelector((state) => state.product.productList);
-  
+
   const filteredProducts =
     selectedCategory === "all"
       ? productList
       : productList.filter((product) => product.category === selectedCategory);
-  
+
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
   };
