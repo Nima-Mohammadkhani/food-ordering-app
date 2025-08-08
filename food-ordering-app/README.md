@@ -1,50 +1,148 @@
-# Welcome to your Expo app 👋
+<div align="center">
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Food Ordering App 🍔📦
 
-## Get started
+Online food ordering with payment, delivery tracking on map, user profile and persistent shopping cart.
 
-1. Install dependencies
+</div>
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- User Profile: Edit information, change profile picture, logout with confirmation modal
+- Settings: Notifications, location, language selection with Bottom Sheet
+- Home, categories, product details
+- Shopping Cart:
+  - Add/remove, delete items
+  - Active discount code (code: `food` with 25% discount)
+  - Payment with success Toast and order creation
+  - Paid items in cart become "in delivery" status and are trackable
+- Delivery tracking on map: Display driver, route and order summary
+- Data Persistence: Shopping cart and active order are preserved after closing the app
 
-   ```bash
-   npx expo start
-   ```
+## Technologies and Libraries
 
-In the output, you'll find options to open the app in a
+- React Native 0.79 + React 19
+- Expo 53 and Expo Router (file-based routing)
+- Redux Toolkit + React Redux
+- Redux Persist (AsyncStorage) for persisting cart and orders
+- NativeWind (Tailwind CSS) for styling
+- react-native-maps for maps and markers
+- expo-image-picker for profile picture selection
+- react-native-toast-message for Toast notifications
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Folder Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+food-ordering-app/
+├─ app/
+│  ├─ _layout.tsx                 # Root navigator + PersistGate
+│  ├─ auth/                       # Login/register/onboarding
+│  └─ (tabs)/
+│     ├─ index.tsx               # Home
+│     ├─ cart/
+│     │  ├─ index.tsx            # Shopping cart + payment + discount code
+│     │  └─ map.tsx              # Order tracking map
+│     ├─ profile/
+│     │  ├─ index.tsx            # Profile
+│     │  └─ settings.tsx         # Settings inside profile
+│     └─ chat/ ...
+├─ components/                    # UI components
+├─ redux/
+│  ├─ slice/
+│  │  ├─ auth.ts
+│  │  └─ product.ts              # Cart, active order, payment calculations
+│  └─ store.ts                   # Store configuration + Persist
+├─ type/                          # TypeScript types
+└─ assets/ ...
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Installation and Run
 
-## Learn more
+```bash
+pnpm i # or yarn / npm
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Production Preview
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+To run close to production mode:
 
-## Join the community
+```bash
+npx expo start --no-dev --minify
+```
 
-Join our community of developers creating universal apps.
+## Build with EAS
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1) Complete `app.json` with identifiers and permissions:
+
+```json
+{
+  "expo": {
+    "android": { "package": "com.yourco.foodapp" },
+    "ios": {
+      "bundleIdentifier": "com.yourco.foodapp",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We use your location to show delivery progress.",
+        "NSPhotoLibraryUsageDescription": "We use your photo for profile avatar."
+      }
+    }
+  }
+}
+```
+
+2) If using Google Maps API, add the keys:
+
+```json
+{
+  "expo": {
+    "ios": { "config": { "googleMapsApiKey": "YOUR_IOS_KEY" } },
+    "android": { "config": { "googleMaps": { "apiKey": "YOUR_ANDROID_KEY" } } }
+  }
+}
+```
+
+3) Create `eas.json` (example):
+
+```json
+{
+  "cli": { "version": ">= 3.0.0" },
+  "build": {
+    "apk": { "android": { "buildType": "apk" } },
+    "production": { "android": { "gradleCommand": ":app:bundleRelease" } }
+  }
+}
+```
+
+4) Build:
+
+```bash
+npx eas login
+npx eas build -p android --profile apk       # Create APK for direct download
+npx eas build -p android --profile production # AAB for Play Store
+npx eas build -p ios --profile production     # Requires Apple account
+```
+
+## Implementation Notes
+
+- Persistent Shopping Cart: With `redux-persist`, `productCartList` and `activeOrder` fields are stored.
+- Payment: Clicking `Pay` creates an active order, displays success Toast and navigates to map.
+- Discount Code: Code `food` applies 25% discount and is considered in payment summary and map.
+- Paid Items: Shown in cart with "in delivery" status and have "View Status" button.
+
+## Scripts
+
+```json
+{
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "expo lint"
+  }
+}
+```
+
+## License
+
+This project is for educational/product demo purposes only. For commercial use, configure identifiers and service keys according to your organization.

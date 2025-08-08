@@ -4,7 +4,8 @@ import { loadUser } from "@/redux/slice/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Stack, Redirect } from "expo-router";
 import { Provider } from "react-redux";
-import { store } from "@/redux/store";
+import { persistor, store } from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import Toast from "react-native-toast-message";
 import { StatusBar } from "react-native";
 import { useFonts } from "expo-font";
@@ -45,7 +46,9 @@ function RootLayoutInner() {
 export default function RootLayout() {
   return (
     <Provider store={store}>
-      <RootLayoutInner />
+      <PersistGate persistor={persistor}>
+        <RootLayoutInner />
+      </PersistGate>
     </Provider>
   );
 }

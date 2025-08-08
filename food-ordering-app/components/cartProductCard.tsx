@@ -8,6 +8,7 @@ interface ProductCardProps {
   removeFromCart: (id: number) => void;
   incrementQuantity: (id: number) => void;
   decrementQuantity: (id: number) => void;
+  onTrack?: (id: number) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -15,6 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
+  onTrack,
 }) => {
   return (
     <View className="flex-row items-center border border-gray-200 bg-white rounded-lg p-4 mb-4 shadow-sm">
@@ -32,33 +34,45 @@ const ProductCard: React.FC<ProductCardProps> = ({
           ${item.price.toLocaleString()}
         </Text>
 
-        <View className="flex-row items-center">
-          <TouchableOpacity
-            onPress={() => decrementQuantity(item.id)}
-            className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
-          >
-            <Ionicons name="remove" size={16} color="#666" />
-          </TouchableOpacity>
+        {item.status === 'delivering' ? (
+          <View className="flex-row items-center gap-2">
+            <Ionicons name="bicycle" size={16} color="#FE8C00" />
+            <Text className="text-sm text-[#FE8C00] font-medium">Sending</Text>
+            <TouchableOpacity
+              onPress={() => onTrack && onTrack(item.id)}
+              className="ml-3 px-3 py-1 rounded-full bg-[#FE8C00]"
+            >
+              <Text className="text-white text-xs">View status</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View className="flex-row items-center">
+            <TouchableOpacity
+              onPress={() => decrementQuantity(item.id)}
+              className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
+            >
+              <Ionicons name="remove" size={16} color="#666" />
+            </TouchableOpacity>
 
-          <Text className="mx-4 font-semibold text-gray-900">
-            {item.quantity}
-          </Text>
+            <Text className="mx-4 font-semibold text-gray-900">
+              {item.quantity}
+            </Text>
 
-          <TouchableOpacity
-            onPress={() => incrementQuantity(item.id)}
-            className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
-          >
-            <Ionicons name="add" size={16} color="#666" />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              onPress={() => incrementQuantity(item.id)}
+              className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
+            >
+              <Ionicons name="add" size={16} color="#666" />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
 
-      <TouchableOpacity
-        onPress={() => removeFromCart(item.id)}
-        className="ml-2"
-      >
-        <Ionicons name="trash-outline" size={20} color="#EF4444" />
-      </TouchableOpacity>
+      {item.status !== 'delivering' && (
+        <TouchableOpacity onPress={() => removeFromCart(item.id)} className="ml-2">
+          <Ionicons name="trash-outline" size={20} color="#EF4444" />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

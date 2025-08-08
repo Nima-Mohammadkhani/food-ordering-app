@@ -3,7 +3,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { LatLng } from '@/type';
+import { LatLng, RootState } from '@/type';
+import { useSelector } from 'react-redux';
 
 const LiveDeliveryMap = () => {
   const [driverLocation, setDriverLocation] = useState<LatLng | null>(null);
@@ -11,13 +12,13 @@ const LiveDeliveryMap = () => {
   const mapRef = useRef<MapView | null>(null);
 
   const restaurantLocation: LatLng = {
-    latitude: 37.7447,
-    longitude: -122.465,
+    latitude: 35.6892,
+    longitude: 51.3890,
   };
-
+  
   const userLocation: LatLng = {
-    latitude: 37.741,
-    longitude: -122.48,
+    latitude: 35.7000,
+    longitude: 51.4000,
   };
 
   useEffect(() => {
@@ -38,6 +39,13 @@ const LiveDeliveryMap = () => {
           };
           setDriverLocation(coords);
           setLocationLoaded(true);
+
+          mapRef.current?.animateToRegion({
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
+          });
         }
       );
     };
@@ -45,19 +53,21 @@ const LiveDeliveryMap = () => {
     subscribeToLocation();
   }, []);
 
+  const activeOrder = useSelector((state: RootState) => state.product.activeOrder);
+
   return (
     <View className="flex-1">
       <MapView
         ref={mapRef}
         style={{ flex: 1 }}
         initialRegion={{
-          latitude: 37.744,
-          longitude: -122.47,
+          latitude: 35.6892,
+          longitude: 51.3890,
           latitudeDelta: 0.02,
           longitudeDelta: 0.02,
         }}
       >
-        {locationLoaded && (
+        {locationLoaded && driverLocation && (
           <>
             <Marker coordinate={driverLocation} title="Deliverer" pinColor="orange" />
             <Polyline
@@ -103,12 +113,21 @@ const LiveDeliveryMap = () => {
           </View>
         </View>
 
-        <View className="flex-row justify-between items-center">
-          <View>
-            <Text className="font-semibold">Order</Text>
-            <Text className="text-sm text-gray-600">2 Burger With Meat</Text>
+        <View className="flex-row justify-between items-start">
+          <View className="flex-1 pr-3">
+            <Text className="font-semibold mb-1">Order</Text>
+            {activeOrder?.items?.map((it) => (
+              <Text key={it.id} className="text-sm text-gray-600">
+                {it.quantity} x {it.title}
+              </Text>
+            ))}
           </View>
-          <Text className="font-bold text-lg">$28.3</Text>
+          <View className="items-end">
+            <Text className="font-bold text-lg">${activeOrder?.total?.toFixed(2) || '0.00'}</Text>
+            {activeOrder?.discountPercent ? (
+              <Text className="text-xs text-gray-500">Saved ${activeOrder.discountAmount.toFixed(2)}</Text>
+            ) : null}
+          </View>
         </View>
       </View>
     </View>

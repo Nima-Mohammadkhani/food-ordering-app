@@ -12,7 +12,11 @@ export interface Product {
   description?: string;
 }
 
-export type CartItem = Product & { quantity: number };
+export type CartItem = Product & {
+  quantity: number;
+  status?: "cart" | "delivering";
+  orderId?: number;
+};
 
 export interface CategoryItem {
   id: number;
@@ -42,6 +46,7 @@ export interface AuthUser {
 export interface ProductState {
   productList: Product[];
   productCartList: CartItem[];
+  activeOrder?: Order;
 }
 
 export interface AuthState {
@@ -120,4 +125,17 @@ export interface UserProfile {
   gender: string;
   phone: string;
   email: string;
+}
+
+
+export type OrderStatus = "paid" | "delivering" | "completed";
+
+export interface Order {
+  items: CartItem[];
+  subtotal: number;
+  discountPercent: number;
+  discountAmount: number;
+  total: number;
+  status: OrderStatus;
+  createdAt: number;
 }
