@@ -78,7 +78,7 @@ const CartScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <Header title="My Cart" />
       {productCartList.length === 0 ? (

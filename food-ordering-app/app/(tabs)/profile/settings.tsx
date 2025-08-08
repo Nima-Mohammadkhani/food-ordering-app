@@ -16,7 +16,7 @@ import Toast from "react-native-toast-message";
 
 const Divider = () => <View className="h-[1px] bg-neutral-200" />;
 const Row = ({ children }: { children: React.ReactNode }) => (
-  <View className="flex-row items-center justify-between py-4 px-4 bg-white">
+  <View className="flex-row items-center justify-between rounded-md py-4 px-4 bg-white">
     {children}
   </View>
 );
@@ -38,11 +38,11 @@ const Settings = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <Header title="Settings" />
-      <View className="flex-1">
-        <View className="px-4 pt-4">
+      <View className="flex-1 px-4">
+        <View className="pt-4">
           <Text className="text-xs text-gray-400 mb-2">PROFILE</Text>
         </View>
 
@@ -66,7 +66,7 @@ const Settings = () => {
           </Row>
         </Pressable>
 
-        <View className="px-4 pt-6">
+        <View className="pt-6">
           <Text className="text-xs text-gray-400 mb-2">OTHER</Text>
         </View>
 
@@ -103,7 +103,6 @@ const Settings = () => {
         </View>
       </View>
 
-      {/* Language Modal */}
       <Modal
         visible={langModalVisible}
         animationType="slide"
