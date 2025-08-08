@@ -12,8 +12,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.yourname.foodordering", 
-      "versionCode": 1, 
+      "package": "com.yourname.foodordering",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#FE8C00"
@@ -39,6 +39,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "82ecedde-a16c-48b6-93e8-6ba34c8b13b0"
+      }
     }
   }
 }
