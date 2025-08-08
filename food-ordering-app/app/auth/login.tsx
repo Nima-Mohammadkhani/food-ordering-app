@@ -30,6 +30,13 @@ const Login = () => {
       Toast.show({ type: "error", text1: "Please register account first" });
     }
   };
+  const forgetPassword = () => {
+    if (user && user.isRegistered) {
+      router.push("/auth/forgetPassword");
+    } else {
+      Toast.show({ type: "error", text1: "Please register account first" });
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1">
@@ -53,7 +60,7 @@ const Login = () => {
             secureTextEntry
           />
           <Text
-            onPress={() => router.push("/auth/forgetPassword")}
+            onPress={forgetPassword}
             className="text-right text-sm text-[#FE8C00]"
           >
             Forgot password?
