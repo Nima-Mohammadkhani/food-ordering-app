@@ -15,7 +15,7 @@ const chats: IChat[] = [
   },
   {
     id: "2",
-    name: "Sara M",
+    name: "Sara",
     lastMessage: "See you tomorrow.",
     time: "09:15 AM",
     read: false,

@@ -89,7 +89,7 @@ const LiveDeliveryMap = () => {
             className="w-12 h-12 rounded-full mr-3"
           />
           <View className="flex-1">
-            <Text className="font-bold text-base">Cristopert Dastin</Text>
+            <Text className="font-bold text-base">Ali amiri</Text>
             <Text className="text-xs text-gray-500">ID 213752</Text>
           </View>
           <TouchableOpacity className="bg-green-600 p-2 rounded-full ml-2">

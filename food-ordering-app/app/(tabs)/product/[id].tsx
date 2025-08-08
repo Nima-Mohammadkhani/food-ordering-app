@@ -21,7 +21,6 @@ import { Product, RootState } from "@/type";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-
 const ProductDetailScreen = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
@@ -80,16 +79,13 @@ const ProductDetailScreen = () => {
       className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
       style={{ width: (screenWidth - 48) / 2 - 8 }}
     >
-      <View className="relative">
+      <View>
         <Image
           source={item.image}
           className="w-full rounded-t-xl"
           style={{ height: 80 }}
           resizeMode="cover"
         />
-        <View className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1 rounded-full">
-          <Ionicons name="heart-outline" size={12} color="red" />
-        </View>
       </View>
 
       <View className="p-2">
