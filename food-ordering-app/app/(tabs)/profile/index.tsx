@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -10,18 +10,21 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "expo-router";
 import Toast from "react-native-toast-message";
 
 import Button from "@/components/ui/Button";
 import Header from "@/components/ui/header";
 import Input from "@/components/ui/Input";
-import { logout } from "@/redux/slice/auth";
-import { UserProfile } from "@/type";
+import { logout, updateUser } from "@/redux/slice/auth";
+import { RootState, UserProfile } from "@/type";
 
 const ProfileScreen = () => {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const reduxUser = useSelector((state: RootState) => state.auth.user);
+  const [profileImage, setProfileImage] = useState<string | null>(
+    (reduxUser?.avatarUri as string) || null
+  );
   const [user, setUser] = useState<UserProfile>({
     fullName: "",
     birthDate: "",
@@ -32,6 +35,21 @@ const ProfileScreen = () => {
   
   const dispatch = useDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    if (reduxUser) {
+      setUser({
+        fullName: reduxUser.fullName || "",
+        birthDate: reduxUser.birthDate || "",
+        gender: reduxUser.gender || "",
+        phone: reduxUser.phone || "",
+        email: reduxUser.email || "",
+      });
+      if (reduxUser.avatarUri) {
+        setProfileImage(reduxUser.avatarUri as string);
+      }
+    }
+  }, [reduxUser]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -54,7 +72,11 @@ const ProfileScreen = () => {
 
     if (!result.canceled) {
       const uri = result.assets && result.assets.length > 0 ? result.assets[0].uri : null;
-      if (uri) setProfileImage(uri);
+      if (uri) {
+        setProfileImage(uri);
+        dispatch(updateUser({ avatarUri: uri }));
+        Toast.show({ type: "success", text1: "Profile image updated" });
+      }
     }
   };
 
@@ -124,8 +146,14 @@ const ProfileScreen = () => {
             className="bg-[#FE8C00] rounded-full"
             disabled={!user.fullName || !user.email}
             onPress={() => {
-              console.log("Saved user info:", user);
-              alert("Profile Saved!");
+              dispatch(updateUser({
+                fullName: user.fullName,
+                birthDate: user.birthDate,
+                gender: user.gender,
+                phone: user.phone,
+                email: user.email,
+              }));
+              Toast.show({ type: "success", text1: "Profile saved" });
             }}
           />
           

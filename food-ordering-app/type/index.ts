@@ -32,6 +32,11 @@ export interface AuthUser {
   username?: string; 
   password?: string;
   isRegistered?: boolean | "true" | "false";
+  fullName?: string;
+  birthDate?: string;
+  gender?: string;
+  phone?: string;
+  avatarUri?: string;
 }
 
 export interface ProductState {

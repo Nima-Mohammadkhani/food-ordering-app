@@ -22,9 +22,17 @@ const authSlice = createSlice({
     loadUser: (state, action: PayloadAction<AuthUser | null>) => {
       state.user = action.payload;
     },
+    updateUser: (state, action: PayloadAction<Partial<AuthUser>>) => {
+      if (!state.user) {
+        state.user = action.payload as AuthUser;
+      } else {
+        state.user = { ...state.user, ...action.payload } as AuthUser;
+      }
+      AsyncStorage.setItem("user", JSON.stringify(state.user));
+    },
   },
 });
 
-export const { login, logout, loadUser } = authSlice.actions;
+export const { login, logout, loadUser, updateUser } = authSlice.actions;
 
 export default authSlice.reducer;
