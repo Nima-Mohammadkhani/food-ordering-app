@@ -137,8 +137,8 @@ const ProductDetailScreen = () => {
             <Image
               source={product.image}
               style={{
-                width: screenWidth - 32,
-                height: (screenWidth - 32) * 0.7,
+                width: screenWidth - 28,
+                height: (screenWidth - 28) * 0.7,
               }}
               resizeMode="cover"
             />
@@ -202,7 +202,12 @@ const ProductDetailScreen = () => {
               Recommended For You
             </Text>
             <Pressable>
-              <Text className="text-[#FE8C00] font-medium">See All</Text>
+              <Text
+                className="text-[#FE8C00] font-medium"
+                onPress={() => router.replace("/(tabs)")}
+              >
+                See All
+              </Text>
             </Pressable>
           </View>
         </View>

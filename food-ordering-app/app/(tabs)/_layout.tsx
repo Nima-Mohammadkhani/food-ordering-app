@@ -1,7 +1,9 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-
-export default function TabsLayout() {
+import { useSelector } from "react-redux";
+import { Text, View } from "react-native";
+const TabsLayout = () => {
+  const productCartList = useSelector((state) => state.product.productCartList);
   return (
     <Tabs
       screenOptions={{
@@ -24,7 +26,16 @@ export default function TabsLayout() {
         options={{
           title: "cart",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cart-outline" size={size} color={color} />
+            <View className="relative">
+              <Ionicons name="cart-outline" size={size} color={color} />
+              {productCartList.length > 0 && (
+                <View className="absolute -right-1 -top-1 bg-red-500 rounded-full w-5 h-5 items-center justify-center">
+                  <Text className="text-white text-[10px] font-bold">
+                    {productCartList.length}
+                  </Text>
+                </View>
+              )}
+            </View>
           ),
         }}
       />
@@ -70,4 +81,5 @@ export default function TabsLayout() {
       />
     </Tabs>
   );
-}
+};
+export default TabsLayout;

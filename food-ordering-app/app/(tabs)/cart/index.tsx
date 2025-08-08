@@ -20,13 +20,13 @@ interface CartItem {
 
 const CartScreen = () => {
   const productCartList = useSelector((state) => state.product.productCartList);
-  console.log(productCartList);
   const dispatch = useDispatch();
   const router = useRouter();
   const removeFromCart = async (productId) => {
     await dispatch(removeItemFromCart(productId));
     Toast.show({ type: "success", text1: "Removed from cart" });
   };
+  const totalPrice = productCartList.reduce((ecc, val) => ecc + val.price, 0);
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <StatusBar hidden />
@@ -34,17 +34,10 @@ const CartScreen = () => {
       {productCartList.length === 0 ? (
         <EmptyCartView />
       ) : (
-        <ScrollView className="flex-1 py-2 px-4">
-          <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-gray-500 text-sm">Delivery Location</Text>
-            <Button
-              title="Change Location"
-              size="md"
-              textClassName="text-white"
-              className="bg-[#FE8C00] rounded-full"
-            />
-          </View>
-
+        <ScrollView
+          className="flex-1 py-2 px-4"
+          showsVerticalScrollIndicator={false}
+        >
           <View className="relative">
             <Input placeholder="Promo Code..." className="h-12" />
             <Button
@@ -68,9 +61,9 @@ const CartScreen = () => {
               Payment Summary
             </Text>
             <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600">Total Items ({""})</Text>
+              <Text className="text-gray-600">Total Items</Text>
               <Text className="font-bold text-gray-900">
-                ${"totalAmount".toLocaleString()}
+                ${totalPrice.toLocaleString()}
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
@@ -83,7 +76,10 @@ const CartScreen = () => {
             </View>
             <View className="flex-row justify-between items-center">
               <Text className="font-bold text-lg text-gray-900">Total</Text>
-              <Text className="font-bold text-xl text-gray-900"></Text>
+              <Text className="font-bold text-xl text-gray-900">
+                {" "}
+                ${totalPrice.toLocaleString()}
+              </Text>
             </View>
             <Button
               title="Pay"
