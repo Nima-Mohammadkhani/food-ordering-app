@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "Food Ordering App",
-    "slug": "Food Ordering App",
+    "slug": "food-ordering-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "Food Ordering App",
+    "scheme": "food-ordering-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
