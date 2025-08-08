@@ -11,7 +11,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "expo-router";
+import { useRouter, Href } from "expo-router";
 import Toast from "react-native-toast-message";
 
 import Button from "@/components/ui/Button";
@@ -32,7 +32,7 @@ const ProfileScreen = () => {
     phone: "",
     email: "",
   });
-  
+
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -51,14 +51,9 @@ const ProfileScreen = () => {
     }
   }, [reduxUser]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    Toast.show({ type: "success", text1: "Logged out successfully" });
-    router.replace("/auth");
-  };
-
   const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
       alert("Permission to access camera roll is required!");
       return;
@@ -71,7 +66,8 @@ const ProfileScreen = () => {
     });
 
     if (!result.canceled) {
-      const uri = result.assets && result.assets.length > 0 ? result.assets[0].uri : null;
+      const uri =
+        result.assets && result.assets.length > 0 ? result.assets[0].uri : null;
       if (uri) {
         setProfileImage(uri);
         dispatch(updateUser({ avatarUri: uri }));
@@ -87,12 +83,22 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
-      <Header title="Profile" />
-      <ScrollView className="flex-1 p-6" showsVerticalScrollIndicator={false}>
+      <Header
+        title="Profile"
+        rightIconName="settings-outline"
+        onRightPress={() => router.push("/(tabs)/profile/settings" as Href)}
+      />
+      <ScrollView
+        className="flex-1 px-6 py-12"
+        showsVerticalScrollIndicator={false}
+      >
         <View className="flex gap-4">
           <View className="flex justify-center items-center self-center relative bg-white size-32 border rounded-full">
             {profileImage ? (
-              <Image source={{ uri: profileImage }} className="w-full h-full rounded-full" />
+              <Image
+                source={{ uri: profileImage }}
+                className="w-full h-full rounded-full"
+              />
             ) : (
               <Ionicons name="person-outline" size={40} />
             )}
@@ -146,23 +152,17 @@ const ProfileScreen = () => {
             className="bg-[#FE8C00] rounded-full"
             disabled={!user.fullName || !user.email}
             onPress={() => {
-              dispatch(updateUser({
-                fullName: user.fullName,
-                birthDate: user.birthDate,
-                gender: user.gender,
-                phone: user.phone,
-                email: user.email,
-              }));
+              dispatch(
+                updateUser({
+                  fullName: user.fullName,
+                  birthDate: user.birthDate,
+                  gender: user.gender,
+                  phone: user.phone,
+                  email: user.email,
+                })
+              );
               Toast.show({ type: "success", text1: "Profile saved" });
             }}
-          />
-          
-          <Button
-            title="Logout"
-            size="md"
-            textClassName="text-white"
-            className="bg-red-500 rounded-full"
-            onPress={handleLogout}
           />
         </View>
       </ScrollView>

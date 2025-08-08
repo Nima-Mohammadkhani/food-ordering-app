@@ -3,22 +3,31 @@ import { View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { HeaderProps } from "@/type";
 
-const Header: React.FC<HeaderProps> = ({ title }) => {
+const Header: React.FC<HeaderProps> = ({
+  title,
+  rightIconName = "share-outline",
+  onRightPress,
+  hideLeft,
+}) => {
   const router = useRouter();
 
   return (
     <View className="flex-row items-center justify-between px-4 py-2 pt-10 bg-white">
-      <Pressable
-        onPress={() => router.back()}
-        className="p-2 rounded-full bg-gray-50"
-      >
-        <Ionicons name="chevron-back" size={24} color="#000" />
-      </Pressable>
+      {hideLeft ? (
+        <View className="p-2 rounded-full" />
+      ) : (
+        <Pressable
+          onPress={() => router.back()}
+          className="p-2 rounded-full bg-gray-50"
+        >
+          <Ionicons name="chevron-back" size={24} color="#000" />
+        </Pressable>
+      )}
 
       <Text className="text-lg font-semibold text-gray-800">{title}</Text>
 
-      <Pressable className="p-2 rounded-full bg-gray-50">
-        <Ionicons name="share-outline" size={24} color="#000" />
+      <Pressable className="p-2 rounded-full bg-gray-50" onPress={onRightPress}>
+        <Ionicons name={rightIconName} size={24} color="#000" />
       </Pressable>
     </View>
   );

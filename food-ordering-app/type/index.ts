@@ -28,8 +28,8 @@ export interface CategoryProps {
 
 export interface AuthUser {
   email?: string;
-  userName?: string; 
-  username?: string; 
+  userName?: string;
+  username?: string;
   password?: string;
   isRegistered?: boolean | "true" | "false";
   fullName?: string;
@@ -83,6 +83,9 @@ export interface InputProps extends TextInputProps {
 
 export interface HeaderProps {
   title: string;
+  rightIconName?: IconName;
+  onRightPress?: () => void;
+  hideLeft?: boolean;
 }
 
 export interface ChatCardItem {
@@ -118,5 +121,3 @@ export interface UserProfile {
   phone: string;
   email: string;
 }
-
-

@@ -5,7 +5,9 @@ import { Text, View } from "react-native";
 import { RootState } from "@/type";
 
 const TabsLayout = () => {
-  const productCartList = useSelector((state: RootState) => state.product.productCartList);
+  const productCartList = useSelector(
+    (state: RootState) => state.product.productCartList
+  );
 
   const totalCartItems = productCartList.reduce(
     (total, item) => total + item.quantity,
@@ -83,6 +85,12 @@ const TabsLayout = () => {
       />
       <Tabs.Screen
         name="cart/map"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="profile/settings"
         options={{
           href: null,
         }}
