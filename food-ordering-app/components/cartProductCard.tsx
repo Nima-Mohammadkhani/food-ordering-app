@@ -4,17 +4,27 @@ import { Ionicons } from "@expo/vector-icons";
 
 interface ProductCardProps {
   item: {
-    id: string;
-    name: string;
+    id: number;
+    title: string;
     price: number;
     quantity: number;
     image: any;
-    selected: boolean;
+    category: string;
+    rating: number;
+    distance: number;
+    description: string;
   };
-  removeFromCart: () => void;
+  removeFromCart: (id: number) => void;
+  incrementQuantity: (id: number) => void;
+  decrementQuantity: (id: number) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ item, removeFromCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  item,
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+}) => {
   return (
     <View className="flex-row items-center border border-gray-200 bg-white rounded-lg p-4 mb-4 shadow-sm">
       <Image
@@ -33,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item, removeFromCart }) => {
 
         <View className="flex-row items-center">
           <TouchableOpacity
-            onPress={() => onDecrement(item.id)}
+            onPress={() => decrementQuantity(item.id)}
             className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
           >
             <Ionicons name="remove" size={16} color="#666" />
@@ -44,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ item, removeFromCart }) => {
           </Text>
 
           <TouchableOpacity
-            onPress={() => onIncrement(item.id)}
+            onPress={() => incrementQuantity(item.id)}
             className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center"
           >
             <Ionicons name="add" size={16} color="#666" />
@@ -52,7 +62,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ item, removeFromCart }) => {
         </View>
       </View>
 
-      <TouchableOpacity onPress={() => removeFromCart(item.id)} className="ml-2">
+      <TouchableOpacity
+        onPress={() => removeFromCart(item.id)}
+        className="ml-2"
+      >
         <Ionicons name="trash-outline" size={20} color="#EF4444" />
       </TouchableOpacity>
     </View>

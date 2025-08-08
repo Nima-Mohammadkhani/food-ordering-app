@@ -7,26 +7,41 @@ import { View, Text, SafeAreaView, StatusBar, ScrollView } from "react-native";
 import Input from "@/components/ui/Input";
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItemFromCart } from "@/redux/slice/product";
+import {
+  removeItemFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: any;
-  selected: boolean;
-}
 
 const CartScreen = () => {
   const productCartList = useSelector((state) => state.product.productCartList);
   const dispatch = useDispatch();
   const router = useRouter();
+
   const removeFromCart = async (productId) => {
     await dispatch(removeItemFromCart(productId));
     Toast.show({ type: "success", text1: "Removed from cart" });
   };
-  const totalPrice = productCartList.reduce((ecc, val) => ecc + val.price, 0);
+
+  const handleIncrementQuantity = async (productId) => {
+    await dispatch(incrementQuantity(productId));
+  };
+
+  const handleDecrementQuantity = async (productId) => {
+    await dispatch(decrementQuantity(productId));
+  };
+
+  const totalPrice = productCartList.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  const totalItems = productCartList.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <StatusBar hidden />
@@ -53,6 +68,8 @@ const CartScreen = () => {
               key={item.id}
               item={item}
               removeFromCart={removeFromCart}
+              incrementQuantity={handleIncrementQuantity}
+              decrementQuantity={handleDecrementQuantity}
             />
           ))}
 
@@ -63,7 +80,13 @@ const CartScreen = () => {
             <View className="flex-row justify-between items-center">
               <Text className="text-gray-600">Total Items</Text>
               <Text className="font-bold text-gray-900">
-                ${totalPrice.toLocaleString()}
+                {totalItems} items
+              </Text>
+            </View>
+            <View className="flex-row justify-between items-center">
+              <Text className="text-gray-600">Subtotal</Text>
+              <Text className="font-bold text-gray-900">
+                ${totalPrice.toFixed(2)}
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
@@ -72,13 +95,12 @@ const CartScreen = () => {
             </View>
             <View className="flex-row justify-between items-center">
               <Text className="text-gray-600">Discount</Text>
-              <Text className="font-bold text-[#FE8C00]"></Text>
+              <Text className="font-bold text-[#FE8C00]">$0.00</Text>
             </View>
             <View className="flex-row justify-between items-center">
               <Text className="font-bold text-lg text-gray-900">Total</Text>
               <Text className="font-bold text-xl text-gray-900">
-                {" "}
-                ${totalPrice.toLocaleString()}
+                ${totalPrice.toFixed(2)}
               </Text>
             </View>
             <Button

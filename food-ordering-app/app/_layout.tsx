@@ -9,9 +9,16 @@ import Toast from "react-native-toast-message";
 import { StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import "../global.css";
+
+interface RootState {
+  auth: {
+    user: any;
+  };
+}
+
 function RootLayoutInner() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });

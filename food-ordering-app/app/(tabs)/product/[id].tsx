@@ -28,6 +28,14 @@ interface Product {
   distance: number;
   rating: number;
   price: number;
+  description: string;
+}
+
+interface RootState {
+  product: {
+    productList: Product[];
+    productCartList: Product[];
+  };
 }
 
 const ProductDetailScreen = () => {
@@ -38,13 +46,17 @@ const ProductDetailScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const productList = useSelector((state) => state.product.productList);
+  const productList = useSelector(
+    (state: RootState) => state.product.productList
+  );
   const dispatch = useDispatch();
 
-  const product = productList.find((p) => p.id === parseInt(id as string));
+  const product = productList.find(
+    (p: Product) => p.id === parseInt(id as string)
+  );
 
   const recommendedProducts = productList.filter(
-    (p) => p.id !== parseInt(id as string)
+    (p: Product) => p.id !== parseInt(id as string)
   );
 
   const groupedProducts = [];
@@ -192,7 +204,6 @@ const ProductDetailScreen = () => {
               Description
             </Text>
             <Text className="text-gray-600 leading-6">
-              {product.title}
               {product.description}
             </Text>
           </View>
@@ -239,36 +250,15 @@ const ProductDetailScreen = () => {
       </ScrollView>
 
       <View className="bg-white border-t border-gray-100 px-4 py-4">
-        <View className="flex-row items-center justify-between">
-          <View className="flex-row items-center bg-gray-50 rounded-lg">
-            <Pressable
-              onPress={() => handleQuantityChange("decrease")}
-              className="p-3"
-            >
-              <Ionicons name="remove" size={20} color="#666" />
-            </Pressable>
-            <Text className="text-lg font-semibold text-gray-800 px-4">
-              {quantity}
-            </Text>
-            <Pressable
-              onPress={() => handleQuantityChange("increase")}
-              className="p-3"
-            >
-              <Ionicons name="add" size={20} color="#666" />
-            </Pressable>
-          </View>
-
-          <View className="flex-1 ml-4">
-            <Button
-              title="Add to Cart"
-              onPress={handleAddToCart}
-              className="bg-[#FE8C00] rounded-2xl flex-1"
-              textClassName="text-white font-semibold text-base"
-              iconLeft="cart-outline"
-              iconSize={20}
-            />
-          </View>
-        </View>
+        <Button
+          title="Add to Cart"
+          onPress={handleAddToCart}
+          className="bg-[#FE8C00] rounded-2xl"
+          textClassName="text-white font-semibold text-base"
+          iconLeft="cart-outline"
+          size="md"
+          iconSize={20}
+        />
       </View>
     </SafeAreaView>
   );
