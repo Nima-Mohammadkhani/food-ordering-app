@@ -8,7 +8,7 @@ const mockProducts = [
     distance: 1.2,
     description:
       "A classic pepperoni pizza topped with generous slices of spicy pepperoni, gooey mozzarella cheese, and our signature tomato sauce. Perfectly baked for a crispy crust and rich flavor. Ideal for meat lovers looking for a satisfying meal.",
-    image: require("../assets/images/food/1.avif"),
+    image: require("../assets/images/food/product/1.png"),
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const mockProducts = [
     distance: 0.8,
     description:
       "A juicy cheeseburger with melted cheddar cheese, fresh lettuce, tomato slices, and our special sauce on a toasted bun. Perfect for a quick and tasty meal any time of the day.",
-    image: require("../assets/images/food/2.avif"),
+    image: require("../assets/images/food/product/2.png"),
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const mockProducts = [
     distance: 1.5,
     description:
       "Golden and crispy French fries, lightly salted and served hot. The perfect side dish to complement any burger or sandwich in our menu.",
-    image: require("../assets/images/food/3.avif"),
+    image: require("../assets/images/food/product/3.png"),
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const mockProducts = [
     distance: 2.1,
     description:
       "Tender grilled chicken breast served on a toasted bun with fresh lettuce, tomato, and mayo. A healthy and delicious sandwich option.",
-    image: require("../assets/images/food/4.avif"),
+    image: require("../assets/images/food/product/4.png"),
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const mockProducts = [
     distance: 1.8,
     description:
       "Fresh romaine lettuce tossed with Caesar dressing, croutons, and grated parmesan cheese. A light and tasty option for a healthier choice.",
-    image: require("../assets/images/food/5.avif"),
+    image: require("../assets/images/food/product/5.png"),
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ const mockProducts = [
     distance: 1.3,
     description:
       "Tender chicken wings glazed with smoky BBQ sauce, served hot and ready to enjoy. A perfect starter or snack for wing lovers.",
-    image: require("../assets/images/food/6.avif"),
+    image: require("../assets/images/food/product/6.png"),
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const mockProducts = [
     distance: 0.9,
     description:
       "Creamy vanilla milkshake made with real vanilla ice cream and topped with whipped cream. A sweet treat to finish your meal.",
-    image: require("../assets/images/food/7.avif"),
+    image: require("../assets/images/food/product/7.png"),
   },
   {
     id: 8,
@@ -85,7 +85,7 @@ const mockProducts = [
     distance: 1.0,
     description:
       "Classic Margarita pizza with fresh tomatoes, mozzarella cheese, basil leaves, and a touch of olive oil baked to perfection.",
-    image: require("../assets/images/food/8.avif"),
+    image: require("../assets/images/food/product/8.png"),
   },
   {
     id: 9,
@@ -96,7 +96,7 @@ const mockProducts = [
     distance: 1.4,
     description:
       "Crispy golden chicken nuggets served with your choice of dipping sauces. Perfect as a snack or Sandwich.",
-    image: require("../assets/images/food/9.avif"),
+    image: require("../assets/images/food/product/9.png"),
   },
   {
     id: 10,
@@ -107,7 +107,7 @@ const mockProducts = [
     distance: 2.3,
     description:
       "Decadent chocolate sundae topped with chocolate syrup, nuts, and whipped cream. A delightful dessert to satisfy your sweet tooth.",
-    image: require("../assets/images/food/10.avif"),
+    image: require("../assets/images/food/product/10.png"),
   },
   {
     id: 11,
@@ -118,7 +118,7 @@ const mockProducts = [
     distance: 1.6,
     description:
       "A spicy chicken burger with crispy fried chicken fillet, lettuce, tomato, and spicy mayo sauce in a toasted bun.",
-    image: require("../assets/images/food/11.avif"),
+    image: require("../assets/images/food/product/11.png"),
   },
   {
     id: 12,
@@ -129,7 +129,7 @@ const mockProducts = [
     distance: 1.1,
     description:
       "Crunchy onion rings battered and fried to a golden brown. A tasty side dish to accompany any meal.",
-    image: require("../assets/images/food/12.avif"),
+    image: require("../assets/images/food/product/12.png"),
   },
   {
     id: 13,
@@ -140,7 +140,7 @@ const mockProducts = [
     distance: 0.7,
     description:
       "Refreshing iced tea brewed fresh and served chilled. A perfect drink for hot days.",
-    image: require("../assets/images/food/13.avif"),
+    image: require("../assets/images/food/product/13.png"),
   },
   {
     id: 14,
@@ -151,7 +151,7 @@ const mockProducts = [
     distance: 2.0,
     description:
       "Breaded fish fillet sandwich with lettuce, tomato, and tartar sauce on a soft bun. A seafood favorite.",
-    image: require("../assets/images/food/14.avif"),
+    image: require("../assets/images/food/product/14.png"),
   },
   {
     id: 15,
@@ -162,7 +162,7 @@ const mockProducts = [
     distance: 1.7,
     description:
       "Cheesy mozzarella sticks breaded and fried to golden perfection. Served with marinara sauce for dipping.",
-    image: require("../assets/images/food/15.avif"),
+    image: require("../assets/images/food/product/15.png"),
   },
   {
     id: 16,
@@ -173,7 +173,7 @@ const mockProducts = [
     distance: 1.9,
     description:
       "A delicious grilled chicken wrap with fresh veggies and a tangy sauce wrapped in a soft tortilla.",
-    image: require("../assets/images/food/16.avif"),
+    image: require("../assets/images/food/product/16.png"),
   },
   {
     id: 17,
@@ -184,7 +184,7 @@ const mockProducts = [
     distance: 2.2,
     description:
       "Three soft tacos filled with seasoned meat, lettuce, cheese, and salsa. Perfect for sharing or a quick meal.",
-    image: require("../assets/images/food/17.avif"),
+    image: require("../assets/images/food/product/17.png"),
   },
   {
     id: 18,
@@ -195,7 +195,7 @@ const mockProducts = [
     distance: 1.3,
     description:
       "A refreshing strawberry smoothie made with fresh strawberries and yogurt. A healthy and tasty beverage.",
-    image: require("../assets/images/food/18.avif"),
+    image: require("../assets/images/food/product/18.png"),
   },
   {
     id: 19,
@@ -206,7 +206,7 @@ const mockProducts = [
     distance: 1.4,
     description:
       "A bacon cheeseburger featuring crispy bacon, melted cheese, lettuce, and tomato on a toasted bun. A hearty favorite.",
-    image: require("../assets/images/food/19.avif"),
+    image: require("../assets/images/food/product/19.png"),
   },
   {
     id: 20,
@@ -217,7 +217,7 @@ const mockProducts = [
     distance: 2.4,
     description:
       "Freshly baked chocolate chip cookies with a gooey center and crispy edges. A perfect sweet snack or dessert.",
-    image: require("../assets/images/food/20.avif"),
+    image: require("../assets/images/food/product/20.png"),
   },
 ];
 

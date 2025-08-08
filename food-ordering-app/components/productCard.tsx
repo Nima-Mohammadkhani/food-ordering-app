@@ -2,7 +2,6 @@ import {
   View,
   Text,
   Image,
-  ImageSourcePropType,
   Dimensions,
   Pressable,
 } from "react-native";
@@ -10,7 +9,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Button from "./ui/Button";
 import { Product } from "@/type";
-import { useState } from "react";
 
 const { width: screenWidth } = Dimensions.get("window");
 const cardWidth = (screenWidth - 48) / 2;
