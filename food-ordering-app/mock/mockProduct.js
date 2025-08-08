@@ -24,7 +24,7 @@ const mockProducts = [
   {
     id: 3,
     title: "French Fries",
-    category: "Sides",
+    category: "Dessert",
     price: 2.99,
     rating: 4.2,
     distance: 1.5,
@@ -35,7 +35,7 @@ const mockProducts = [
   {
     id: 4,
     title: "Grilled Chicken Sandwich",
-    category: "Sandwich",
+    category: "Burger",
     price: 6.5,
     rating: 4.6,
     distance: 2.1,
@@ -57,7 +57,7 @@ const mockProducts = [
   {
     id: 6,
     title: "BBQ Chicken Wings",
-    category: "Appetizer",
+    category: "Sandwich",
     price: 7.95,
     rating: 4.7,
     distance: 1.3,
@@ -68,7 +68,7 @@ const mockProducts = [
   {
     id: 7,
     title: "Vanilla Milkshake",
-    category: "Drinks",
+    category: "Sandwich",
     price: 3.49,
     rating: 4.1,
     distance: 0.9,
@@ -90,12 +90,12 @@ const mockProducts = [
   {
     id: 9,
     title: "Chicken Nuggets",
-    category: "Appetizer",
+    category: "Sandwich",
     price: 4.25,
     rating: 4.0,
     distance: 1.4,
     description:
-      "Crispy golden chicken nuggets served with your choice of dipping sauces. Perfect as a snack or appetizer.",
+      "Crispy golden chicken nuggets served with your choice of dipping sauces. Perfect as a snack or Sandwich.",
     image: require("../assets/images/food/9.avif"),
   },
   {
@@ -123,7 +123,7 @@ const mockProducts = [
   {
     id: 12,
     title: "Onion Rings",
-    category: "Sides",
+    category: "Dessert",
     price: 3.25,
     rating: 4.2,
     distance: 1.1,
@@ -134,7 +134,7 @@ const mockProducts = [
   {
     id: 13,
     title: "Iced Tea",
-    category: "Drinks",
+    category: "Dessert",
     price: 1.99,
     rating: 3.9,
     distance: 0.7,
@@ -145,7 +145,7 @@ const mockProducts = [
   {
     id: 14,
     title: "Fish Sandwich",
-    category: "Sandwich",
+    category: "Burger",
     price: 5.99,
     rating: 4.1,
     distance: 2.0,
@@ -156,7 +156,7 @@ const mockProducts = [
   {
     id: 15,
     title: "Mozzarella Sticks",
-    category: "Appetizer",
+    category: "Sandwich",
     price: 4.5,
     rating: 4.4,
     distance: 1.7,
@@ -178,7 +178,7 @@ const mockProducts = [
   {
     id: 17,
     title: "Taco Trio",
-    category: "Sandwich",
+    category: "Burger",
     price: 6.75,
     rating: 4.6,
     distance: 2.2,
@@ -189,7 +189,7 @@ const mockProducts = [
   {
     id: 18,
     title: "Strawberry Smoothie",
-    category: "Drinks",
+    category: "Dessert",
     price: 3.99,
     rating: 4.2,
     distance: 1.3,
