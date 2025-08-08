@@ -13,22 +13,23 @@ import {
   decrementQuantity,
 } from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
+import { RootState } from "@/type";
 
 const CartScreen = () => {
-  const productCartList = useSelector((state) => state.product.productCartList);
+  const productCartList = useSelector((state: RootState) => state.product.productCartList);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const removeFromCart = async (productId) => {
+  const removeFromCart = async (productId: number) => {
     await dispatch(removeItemFromCart(productId));
     Toast.show({ type: "success", text1: "Removed from cart" });
   };
 
-  const handleIncrementQuantity = async (productId) => {
+  const handleIncrementQuantity = async (productId: number) => {
     await dispatch(incrementQuantity(productId));
   };
 
-  const handleDecrementQuantity = async (productId) => {
+  const handleDecrementQuantity = async (productId: number) => {
     await dispatch(decrementQuantity(productId));
   };
 

@@ -1,10 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
-
-interface HeaderProps {
-  title: string;
-}
+import { HeaderProps } from "@/type";
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const router = useRouter();

@@ -9,12 +9,7 @@ import Toast from "react-native-toast-message";
 import { StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import "../global.css";
-
-interface RootState {
-  auth: {
-    user: any;
-  };
-}
+import { RootState } from "@/type";
 
 function RootLayoutInner() {
   const dispatch = useDispatch();

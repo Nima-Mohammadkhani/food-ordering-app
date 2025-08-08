@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import { TextInput, View, Text, Pressable, TextInputProps } from "react-native";
+import React, { forwardRef, useState } from "react";
+import { TextInput, View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { InputProps } from "@/type";
 
-interface InputProps extends TextInputProps {
-  label?: string;
-  error?: string;
-  leftIcon?: keyof typeof Ionicons.glyphMap;
-  rightIcon?: keyof typeof Ionicons.glyphMap;
-  secureToggle?: boolean;
-  containerClassName?: string;
-  inputClassName?: string;
-}
-
-const Input = ({
+const Input = forwardRef<TextInput, InputProps>(
+({
   label,
   error,
   leftIcon,
@@ -22,7 +14,7 @@ const Input = ({
   containerClassName = "",
   inputClassName = "",
   ...props
-}: InputProps) => {
+}, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hidePassword, setHidePassword] = useState(secureTextEntry);
 
@@ -50,6 +42,7 @@ const Input = ({
           secureTextEntry={hidePassword}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          ref={ref}
           {...props}
         />
 
@@ -75,5 +68,6 @@ const Input = ({
       {error && <Text className="mt-1 text-red-500 text-sm">{error}</Text>}
     </View>
   );
-};
+});
+Input.displayName = "Input";
 export default Input;

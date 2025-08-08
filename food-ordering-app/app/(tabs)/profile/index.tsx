@@ -18,10 +18,11 @@ import Button from "@/components/ui/Button";
 import Header from "@/components/ui/header";
 import Input from "@/components/ui/Input";
 import { logout } from "@/redux/slice/auth";
+import { UserProfile } from "@/type";
 
 const ProfileScreen = () => {
-  const [profileImage, setProfileImage] = useState(null);
-  const [user, setUser] = useState({
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [user, setUser] = useState<UserProfile>({
     fullName: "",
     birthDate: "",
     gender: "",
@@ -51,12 +52,13 @@ const ProfileScreen = () => {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setProfileImage(result.assets[0].uri);
+    if (!result.canceled) {
+      const uri = result.assets && result.assets.length > 0 ? result.assets[0].uri : null;
+      if (uri) setProfileImage(uri);
     }
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof UserProfile, value: string) => {
     setUser((prev) => ({ ...prev, [field]: value }));
   };
 

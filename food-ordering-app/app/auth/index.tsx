@@ -41,7 +41,7 @@ const Index = () => {
   const current = onboarding[step];
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar hidden/>
+      <StatusBar hidden />
       <View className="relative flex-1">
         <Image
           source={current.image}
@@ -49,9 +49,7 @@ const Index = () => {
           resizeMode="cover"
         />
         <View className="absolute bottom-0 p-10">
-          <View
-            className="flex flex-col gap-5 p-6 rounded-3xl shadow-lg bg-[#FE8C00]"
-          >
+          <View className="flex flex-col gap-5 p-6 rounded-3xl shadow-lg bg-[#FE8C00]">
             <Text className="text-white text-3xl font-semibold text-center mb-3">
               {current.title}
             </Text>

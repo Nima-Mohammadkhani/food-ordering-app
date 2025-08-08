@@ -9,21 +9,7 @@ import {
   Easing,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
-interface ButtonProps {
-  title?: string;
-  onPress?: () => void;
-  variant?: string;
-  size?: string;
-  className?: string;
-  textClassName?: string;
-  disabled?: boolean;
-  loading?: boolean;
-  iconLeft?: keyof typeof Ionicons.glyphMap;
-  iconRight?: keyof typeof Ionicons.glyphMap;
-  iconSize?: number;
-  rippleColor?: string;
-}
+import { ButtonProps } from "@/type";
 
 const Button = ({
   title,

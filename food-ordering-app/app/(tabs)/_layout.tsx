@@ -2,20 +2,10 @@ import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { Text, View } from "react-native";
-
-interface RootState {
-  product: {
-    productCartList: Array<{
-      id: number;
-      quantity: number;
-    }>;
-  };
-}
+import { RootState } from "@/type";
 
 const TabsLayout = () => {
-  const productCartList = useSelector(
-    (state: RootState) => state.product.productCartList
-  );
+  const productCartList = useSelector((state: RootState) => state.product.productCartList);
 
   const totalCartItems = productCartList.reduce(
     (total, item) => total + item.quantity,

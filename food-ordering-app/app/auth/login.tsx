@@ -7,14 +7,15 @@ import { SafeAreaView, StatusBar, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import { login } from "@/redux/slice/auth";
+import { RootState } from "@/type";
 
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  const loading = useSelector((state) => state.auth.loading);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const loading = useSelector((state: RootState) => state.auth.loading);
 
   const loginUser = async () => {
     if (user && user.isRegistered) {

@@ -1,17 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, Pressable, Image } from "react-native";
-
-export type ChatCardProps = {
-  item: {
-    id: string;
-    name: string;
-    avatar: string;
-    lastMessage: string;
-    time: string;
-    read: boolean;
-  };
-  onPress?: () => void;
-};
+import { ChatCardProps } from "@/type";
 
 const ChatCard = ({ item, onPress }: ChatCardProps) => {
   return (

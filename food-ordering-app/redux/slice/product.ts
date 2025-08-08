@@ -1,14 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import mockProducts from "@/mock/mockProduct";
+import { Product, CartItem, ProductState } from "@/type";
+
+const initialState: ProductState = {
+  productList: mockProducts as unknown as Product[],
+  productCartList: [],
+};
 
 const product = createSlice({
   name: "product",
-  initialState: {
-    productList: mockProducts,
-    productCartList: [],
-  },
+  initialState,
   reducers: {
-    addItemToCart: (state, action) => {
+    addItemToCart: (state, action: PayloadAction<Product>) => {
       const existingItem = state.productCartList.find(
         (item) => item.id === action.payload.id
       );
@@ -16,18 +19,16 @@ const product = createSlice({
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.productCartList.push({
-          ...action.payload,
-          quantity: 1,
-        });
+        const newItem: CartItem = { ...action.payload, quantity: 1 } as CartItem;
+        state.productCartList.push(newItem);
       }
     },
-    removeItemFromCart: (state, action) => {
+    removeItemFromCart: (state, action: PayloadAction<number>) => {
       state.productCartList = state.productCartList.filter(
         (item) => item.id !== action.payload
       );
     },
-    incrementQuantity: (state, action) => {
+    incrementQuantity: (state, action: PayloadAction<number>) => {
       const item = state.productCartList.find(
         (item) => item.id === action.payload
       );
@@ -35,7 +36,7 @@ const product = createSlice({
         item.quantity += 1;
       }
     },
-    decrementQuantity: (state, action) => {
+    decrementQuantity: (state, action: PayloadAction<number>) => {
       const item = state.productCartList.find(
         (item) => item.id === action.payload
       );

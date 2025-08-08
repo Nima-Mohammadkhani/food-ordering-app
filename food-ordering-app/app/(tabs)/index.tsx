@@ -10,19 +10,11 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-interface Product {
-  id: number;
-  image: any;
-  title: string;
-  category: string;
-  distance: number;
-  rating: number;
-  price: number;
-}
+import { Product, RootState } from "@/type";
 
 const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const productList = useSelector((state) => state.product.productList);
+  const productList = useSelector((state: RootState) => state.product.productList);
 
   const filteredProducts =
     selectedCategory === "all"

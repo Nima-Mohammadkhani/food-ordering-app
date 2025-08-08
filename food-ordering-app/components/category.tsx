@@ -5,19 +5,14 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-
-interface CategoryProps {
-  onCategoryPress?: (category: string) => void;
-  onSeeAllPress?: () => void;
-  selectedCategory?: string;
-}
+import { CategoryItem, CategoryProps } from "@/type";
 
 const Category = ({
   onCategoryPress,
   onSeeAllPress,
   selectedCategory = "all",
 }: CategoryProps) => {
-  const category: { id: number; name: string; image: ImageSourcePropType }[] = [
+  const category: CategoryItem[] = [
     {
       id: 1,
       name: "Burger",

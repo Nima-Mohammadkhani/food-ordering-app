@@ -17,26 +17,10 @@ import Header from "@/components/ui/header";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
+import { Product, RootState } from "@/type";
 
 const { width: screenWidth } = Dimensions.get("window");
 
-interface Product {
-  id: number;
-  image: any;
-  title: string;
-  category: string;
-  distance: number;
-  rating: number;
-  price: number;
-  description: string;
-}
-
-interface RootState {
-  product: {
-    productList: Product[];
-    productCartList: Product[];
-  };
-}
 
 const ProductDetailScreen = () => {
   const router = useRouter();

@@ -13,14 +13,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Header from "@/components/ui/header";
 import Input from "@/components/ui/Input";
-
-interface IMessage {
-  id: string;
-  message: string;
-  timestamp: number;
-  isUser: boolean;
-  status?: "sending" | "sent" | "delivered" | "read";
-}
+import { IMessage } from "@/type";
 
 const initialMessages: IMessage[] = [
   {

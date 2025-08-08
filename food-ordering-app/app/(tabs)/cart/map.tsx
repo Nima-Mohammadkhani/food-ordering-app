@@ -3,18 +3,19 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { LatLng } from '@/type';
 
 const LiveDeliveryMap = () => {
-  const [driverLocation, setDriverLocation] = useState(null);
-  const [locationLoaded, setLocationLoaded] = useState(false);
-  const mapRef = useRef(null);
+  const [driverLocation, setDriverLocation] = useState<LatLng | null>(null);
+  const [locationLoaded, setLocationLoaded] = useState<boolean>(false);
+  const mapRef = useRef<MapView | null>(null);
 
-  const restaurantLocation = {
+  const restaurantLocation: LatLng = {
     latitude: 37.7447,
     longitude: -122.465,
   };
 
-  const userLocation = {
+  const userLocation: LatLng = {
     latitude: 37.741,
     longitude: -122.48,
   };
@@ -31,7 +32,7 @@ const LiveDeliveryMap = () => {
           distanceInterval: 5,
         },
         (loc) => {
-          const coords = {
+          const coords: LatLng = {
             latitude: loc.coords.latitude,
             longitude: loc.coords.longitude,
           };

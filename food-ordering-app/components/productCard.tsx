@@ -9,21 +9,12 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Button from "./ui/Button";
-
-interface ProductItem {
-  id: number;
-  image: any;
-  title: string;
-  category: string;
-  distance: number;
-  rating: number;
-  price: number;
-}
+import { Product } from "@/type";
 
 const { width: screenWidth } = Dimensions.get("window");
 const cardWidth = (screenWidth - 48) / 2;
 
-const ProductCart = ({ item }: { item: ProductItem }) => {
+const ProductCart = ({ item }: { item: Product }) => {
   const router = useRouter();
 
   const handlePress = () => {

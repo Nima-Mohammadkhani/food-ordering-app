@@ -1,19 +1,10 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { CartItem } from "@/type";
 
 interface ProductCardProps {
-  item: {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
-    image: any;
-    category: string;
-    rating: number;
-    distance: number;
-    description: string;
-  };
+  item: CartItem;
   removeFromCart: (id: number) => void;
   incrementQuantity: (id: number) => void;
   decrementQuantity: (id: number) => void;

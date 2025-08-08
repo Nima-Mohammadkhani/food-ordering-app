@@ -2,15 +2,7 @@ import { View, SafeAreaView, FlatList, StatusBar, ImageBackground } from "react-
 import { useRouter } from "expo-router";
 import Header from "@/components/ui/header";
 import ChatCard from "@/components/ChatCard";
-
-interface IChat {
-  id: string;
-  name: string;
-  lastMessage: string;
-  time: string;
-  read: boolean;
-  avatar: string;
-}
+import { IChat } from "@/type";
 
 const chats: IChat[] = [
   {
