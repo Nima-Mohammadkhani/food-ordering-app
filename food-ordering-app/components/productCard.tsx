@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Button from "./ui/Button";
 import { Product } from "@/type";
+import { useState } from "react";
 
 const { width: screenWidth } = Dimensions.get("window");
 const cardWidth = (screenWidth - 48) / 2;
@@ -30,7 +31,7 @@ const ProductCart = ({ item }: { item: Product }) => {
         minHeight: 220,
       }}
     >
-      <View className="relative">
+      <View>
         <Image
           source={item.image}
           className="w-full rounded-t-xl"
@@ -39,10 +40,6 @@ const ProductCart = ({ item }: { item: Product }) => {
           }}
           resizeMode="cover"
         />
-
-        <View className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm">
-          <Ionicons name="heart-outline" size={16} color="red" />
-        </View>
       </View>
 
       <View className="p-3 flex-1 justify-around">
