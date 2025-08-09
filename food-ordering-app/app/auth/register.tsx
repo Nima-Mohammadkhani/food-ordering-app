@@ -26,7 +26,7 @@ const Register = () => {
     await dispatch(login({ email, userName, password, isRegistered: "true" }));
     Toast.show({
       type: "success",
-      text1: "Register success",
+      text1: t("auth.RegisterSuccess"),
       text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
     });
     router.replace("/(tabs)");

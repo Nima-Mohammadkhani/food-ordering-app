@@ -228,8 +228,9 @@
     "emailAddress": "Email Address",
     "resetTitle": " Reset Password",
     "resetSubtitle": "Your new password must be different from the previously used password",
-    "NewPassword":"New Password",
-    "Confirm Password":"Confirm Password",
+    "NewPassword": "New Password",
+    "ConfirmPassword": "ConfirmPassword",
+    "RegisterSuccess": "Register success",
     "and": "and",
     "onboarding": {
       "1": {

@@ -229,7 +229,8 @@
     "resetTitle": "بازیابی رمز عبور",
     "resetSubtitle": "رمز عبور جدید شما باید با رمز عبور قبلی متفاوت باشد",
     "NewPassword": "رمز جدید",
-    "Confirm Password": "تکرار رمز",
+    "ConfirmPassword": "تکرار رمز",
+    "RegisterSuccess": "ثبت موفقیت",
     "and": "و",
     "onboarding": {
       "1": {

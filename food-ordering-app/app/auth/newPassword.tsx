@@ -51,7 +51,7 @@ const NewPassword = () => {
                 onChangeText={setNewPassword}
               />
               <Input
-                label={t("auth.Confirm Password")}
+                label={t("auth.ConfirmPassword")}
                 secureToggle
                 secureTextEntry
                 value={password}
