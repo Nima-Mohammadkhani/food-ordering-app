@@ -104,7 +104,9 @@ const CartScreen = () => {
               title={t("cart.apply")}
               size="sm"
               textClassName="text-white"
-              className="bg-[#FE8C00] rounded-full absolute right-1 top-1.5"
+              className={`${
+                i18n.language == "fa" ? "top-1" : "top-1.5"
+              } bg-[#FE8C00] rounded-full absolute right-1`}
               onPress={applyPromo}
             />
           </View>

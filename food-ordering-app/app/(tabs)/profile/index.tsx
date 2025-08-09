@@ -36,7 +36,7 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (reduxUser) {
@@ -91,7 +91,7 @@ const ProfileScreen = () => {
         onRightPress={() => router.push("/(tabs)/profile/settings" as Href)}
       />
       <ScrollView
-        className="flex-1 px-6 py-12"
+        className={`flex-1 px-6 ${i18n.language == "fa" ? "py-6" : "py-12"}`}
         showsVerticalScrollIndicator={false}
       >
         <View className="flex gap-4">

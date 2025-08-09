@@ -30,16 +30,18 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 const Settings = () => {
   const [pushEnabled, setPushEnabled] = useState(true);
   const [locationEnabled, setLocationEnabled] = useState(true);
-  const [language, setLanguage] = useState<"fa" | "en">(i18n.language === 'fa' ? 'fa' : 'en');
+  const [language, setLanguage] = useState<"fa" | "en">(
+    i18n.language === "fa" ? "fa" : "en"
+  );
   const [langModalVisible, setLangModalVisible] = useState(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const languages = useMemo(() => (["en", "fa"] as const), []);
+  const languages = useMemo(() => ["en", "fa"] as const, []);
 
   useEffect(() => {
-    setLanguage(i18n.language === 'fa' ? 'fa' : 'en');
+    setLanguage(i18n.language === "fa" ? "fa" : "en");
   }, []);
 
   const handleConfirmLogout = () => {
@@ -50,15 +52,15 @@ const Settings = () => {
 
   const applyLanguage = async (lang: "en" | "fa") => {
     await i18n.changeLanguage(lang);
-    await AsyncStorage.setItem('appLanguage', lang);
+    await AsyncStorage.setItem("appLanguage", lang);
     setLanguage(lang);
     setLangModalVisible(false);
 
-    const enableRtl = lang === 'fa';
+    const enableRtl = lang === "fa";
     I18nManager.allowRTL(enableRtl);
     I18nManager.forceRTL(enableRtl);
 
-    if (Platform.OS === 'web') {
+    if (Platform.OS === "web") {
       (globalThis as unknown as { location: Location }).location.reload();
     } else {
       DevSettings.reload();
@@ -71,51 +73,87 @@ const Settings = () => {
       <Header title={t("settings.title")} />
       <View className="flex-1 px-4">
         <View className="pt-4">
-          <Text className="text-xs text-gray-400 mb-2">{t("settings.profileSection")}</Text>
+          <Text className="text-xs text-gray-400 mb-2">
+            {t("settings.profileSection")}
+          </Text>
         </View>
 
         <Row>
-          <Text className="text-base text-gray-800">{t("settings.pushNotifications")}</Text>
+          <Text className="text-base text-gray-800">
+            {t("settings.pushNotifications")}
+          </Text>
           <Switch value={pushEnabled} onValueChange={setPushEnabled} />
         </Row>
         <Divider />
         <Row>
-          <Text className="text-base text-gray-800">{t("settings.location")}</Text>
+          <Text className="text-base text-gray-800">
+            {t("settings.location")}
+          </Text>
           <Switch value={locationEnabled} onValueChange={setLocationEnabled} />
         </Row>
         <Divider />
         <Pressable onPress={() => setLangModalVisible(true)}>
           <Row>
-            <Text className="text-base text-gray-800">{t("settings.language")}</Text>
+            <Text className="text-base text-gray-800">
+              {t("settings.language")}
+            </Text>
             <View className="flex-row items-center gap-2">
-              <Text className="text-sm text-gray-500">{t(`settings.languages.${language}`)}</Text>
-              <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+              <Text className="text-sm text-gray-500">
+                {t(`settings.languages.${language}`)}
+              </Text>
+              <Ionicons
+                name={
+                  i18n.language == "fa" ? "chevron-back" : "chevron-forward"
+                }
+                size={18}
+                color="#9CA3AF"
+              />
             </View>
           </Row>
         </Pressable>
 
         <View className="pt-6">
-          <Text className="text-xs text-gray-400 mb-2">{t("settings.otherSection")}</Text>
+          <Text className="text-xs text-gray-400 mb-2">
+            {t("settings.otherSection")}
+          </Text>
         </View>
 
         <Pressable>
           <Row>
-            <Text className="text-base text-gray-800">{t("settings.about")}</Text>
-            <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+            <Text className="text-base text-gray-800">
+              {t("settings.about")}
+            </Text>
+            <Ionicons
+              name={i18n.language == "fa" ? "chevron-back" : "chevron-forward"}
+              size={18}
+              color="#9CA3AF"
+            />
           </Row>
         </Pressable>
         <Divider />
         <Pressable>
           <Row>
-            <Text className="text-base text-gray-800">{t("settings.privacyPolicy")}</Text>
-            <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+            <Text className="text-base text-gray-800">
+              {t("settings.privacyPolicy")}
+            </Text>
+            <Ionicons
+              name={i18n.language == "fa" ? "chevron-back" : "chevron-forward"}
+              size={18}
+              color="#9CA3AF"
+            />
           </Row>
         </Pressable>
         <Divider />
         <Pressable>
           <Row>
-            <Text className="text-base text-gray-800">{t("settings.termsAndConditions")}</Text>
-            <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+            <Text className="text-base text-gray-800">
+              {t("settings.termsAndConditions")}
+            </Text>
+            <Ionicons
+              name={i18n.language == "fa" ? "chevron-back" : "chevron-forward"}
+              size={18}
+              color="#9CA3AF"
+            />
           </Row>
         </Pressable>
 
@@ -124,7 +162,9 @@ const Settings = () => {
             onPress={() => setLogoutModalVisible(true)}
             className="bg-[#FE8C00] rounded-full py-3 items-center"
           >
-            <Text className="text-white font-semibold">{t("settings.logout")}</Text>
+            <Text className="text-white font-semibold">
+              {t("settings.logout")}
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -140,7 +180,9 @@ const Settings = () => {
             <View className="items-center py-2">
               <View className="w-14 h-1.5 bg-gray-300 rounded-full" />
             </View>
-            <Text className="text-base font-semibold mb-3">{t("settings.selectLanguage")}</Text>
+            <Text className="text-base font-semibold mb-3">
+              {t("settings.selectLanguage")}
+            </Text>
             {languages.map((lang) => (
               <Pressable
                 key={lang}
@@ -150,10 +192,9 @@ const Settings = () => {
                 }`}
               >
                 <View className="flex-row items-center gap-3">
-                  <View className="w-8 h-8 rounded-full bg-gray-100 items-center justify-center">
-                    <Text>{lang === 'fa' ? '🇮🇷' : '🇺🇸'}</Text>
-                  </View>
-                  <Text className="text-base">{t(`settings.languages.${lang}`)}</Text>
+                  <Text className="text-base">
+                    {t(`settings.languages.${lang}`)}
+                  </Text>
                 </View>
                 {language === lang && (
                   <Ionicons name="checkmark-circle" size={20} color="#FE8C00" />
@@ -164,7 +205,9 @@ const Settings = () => {
               onPress={() => applyLanguage(language)}
               className="bg-[#FE8C00] rounded-full py-3 items-center mt-2"
             >
-              <Text className="text-white font-semibold">{t("settings.select")}</Text>
+              <Text className="text-white font-semibold">
+                {t("settings.select")}
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -182,21 +225,29 @@ const Settings = () => {
               <View className="w-14 h-1.5 bg-gray-300 rounded-full" />
             </View>
 
-            <Text className="text-lg font-semibold mb-2 text-center">{t("settings.logoutTitle")}</Text>
-            <Text className="text-gray-500 mb-5 text-center">{t("settings.logoutQuestion")}</Text>
+            <Text className="text-lg font-semibold mb-2 text-center">
+              {t("settings.logoutTitle")}
+            </Text>
+            <Text className="text-gray-500 mb-5 text-center">
+              {t("settings.logoutQuestion")}
+            </Text>
 
             <View className="flex-row gap-3">
               <Pressable
                 className="flex-1 h-12 rounded-full bg-gray-100 items-center justify-center"
                 onPress={() => setLogoutModalVisible(false)}
               >
-                <Text className="text-gray-800 font-semibold">{t("settings.cancel")}</Text>
+                <Text className="text-gray-800 font-semibold">
+                  {t("settings.cancel")}
+                </Text>
               </Pressable>
               <Pressable
                 className="flex-1 h-12 rounded-full bg-[#FE8C00] items-center justify-center"
                 onPress={handleConfirmLogout}
               >
-                <Text className="text-white font-semibold">{t("settings.logout")}</Text>
+                <Text className="text-white font-semibold">
+                  {t("settings.logout")}
+                </Text>
               </Pressable>
             </View>
           </View>
