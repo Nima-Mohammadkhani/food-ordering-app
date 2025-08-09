@@ -15,7 +15,11 @@ import { Ionicons } from "@expo/vector-icons";
 import Button from "@/components/ui/Button";
 import Header from "@/components/ui/header";
 import { useDispatch, useSelector } from "react-redux";
-import { addItemToCart } from "@/redux/slice/product";
+import {
+  addItemToCart,
+  addToFavorites,
+  removeFromFavorites,
+} from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
 import { Product, RootState } from "@/type";
 import { useTranslation } from "react-i18next";
@@ -25,8 +29,6 @@ const { width: screenWidth } = Dimensions.get("window");
 const ProductDetailScreen = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const [quantity, setQuantity] = useState<number>(0);
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -57,14 +59,6 @@ const ProductDetailScreen = () => {
     );
   }
 
-  const handleQuantityChange = (type: "increase" | "decrease") => {
-    if (type === "increase") {
-      setQuantity((prev) => prev + 1);
-    } else if (type === "decrease" && quantity > 0) {
-      setQuantity((prev) => prev - 1);
-    }
-  };
-
   const handleAddToCart = async () => {
     await dispatch(addItemToCart(product));
     Toast.show({ type: "success", text1: t("product.addedToCartSuccess") });
@@ -72,6 +66,20 @@ const ProductDetailScreen = () => {
 
   const handleProductPress = (productId: number) => {
     router.push(`/product/${productId}`);
+  };
+
+  const isInFavorites = useSelector((state: RootState) =>
+    state.product.favoriteProducts.some((p) => p.id === product.id)
+  );
+
+  const handleToggleFavorite = async () => {
+    if (isInFavorites) {
+      await dispatch(removeFromFavorites(product.id));
+      Toast.show({ type: "success", text1: t("favorite.removed") });
+    } else {
+      await dispatch(addToFavorites(product));
+      Toast.show({ type: "success", text1: t("favorite.added") });
+    }
   };
 
   const renderRecommendedProduct = (item: Product) => (
@@ -140,14 +148,12 @@ const ProductDetailScreen = () => {
               }}
               resizeMode="cover"
             />
-            <Pressable
-              onPress={() => setIsFavorite(!isFavorite)}
-              className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-sm"
-            >
+            <Pressable className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-sm">
               <Ionicons
-                name={isFavorite ? "heart" : "heart-outline"}
+                name={isInFavorites ? "heart" : "heart-outline"}
                 size={24}
                 color="red"
+                onPress={handleToggleFavorite}
               />
             </Pressable>
           </View>

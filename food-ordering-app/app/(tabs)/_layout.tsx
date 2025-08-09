@@ -74,6 +74,12 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
+        name="favorite/index"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
         name="product/[id]"
         options={{
           href: null,

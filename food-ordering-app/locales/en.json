@@ -3,7 +3,8 @@
     "home": "Home",
     "cart": "Cart",
     "chat": "Chat",
-    "profile": "Profile"
+    "profile": "Profile",
+    "favorite": "Favorites"
   },
   "product": {
     "distanceUnit": "m",
@@ -111,6 +112,12 @@
       "dessert": "Dessert",
       "pizza": "Pizza"
     }
+  },
+  "favorite": {
+    "title": "Favorites",
+    "empty": "No favorite items yet",
+    "added": "Added to favorites",
+    "removed": "Removed from favorites"
   },
   "profile": {
     "title": "Profile",

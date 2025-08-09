@@ -5,6 +5,7 @@ import { Product, CartItem, ProductState, Order } from "@/type";
 const initialState: ProductState = {
   productList: mockProducts as unknown as Product[],
   productCartList: [],
+  favoriteProducts: [],
 };
 
 const product = createSlice({
@@ -25,6 +26,19 @@ const product = createSlice({
         } as CartItem;
         state.productCartList.push(newItem);
       }
+    },
+    addToFavorites: (state, action: PayloadAction<Product>) => {
+      const exists = state.favoriteProducts.some(
+        (p) => p.id === action.payload.id
+      );
+      if (!exists) {
+        state.favoriteProducts.push(action.payload);
+      }
+    },
+    removeFromFavorites: (state, action: PayloadAction<number>) => {
+      state.favoriteProducts = state.favoriteProducts.filter(
+        (p) => p.id !== action.payload
+      );
     },
     removeItemFromCart: (state, action: PayloadAction<number>) => {
       state.productCartList = state.productCartList.filter(
@@ -98,6 +112,8 @@ export const {
   decrementQuantity,
   clearCart,
   createOrderFromCart,
+  addToFavorites,
+  removeFromFavorites,
 } = product.actions;
 
 export default product.reducer;

@@ -46,6 +46,7 @@ export interface AuthUser {
 export interface ProductState {
   productList: Product[];
   productCartList: CartItem[];
+  favoriteProducts: Product[];
   activeOrder?: Order;
 }
 
@@ -126,7 +127,6 @@ export interface UserProfile {
   phone: string;
   email: string;
 }
-
 
 export type OrderStatus = "paid" | "delivering" | "completed";
 

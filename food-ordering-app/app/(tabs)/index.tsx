@@ -17,7 +17,9 @@ const HomeScreen = () => {
   const productList = useSelector(
     (state: RootState) => state.product.productList
   );
-
+  const favoriteProducts = useSelector(
+    (state: RootState) => state.product.favoriteProducts
+  );
   const filteredProducts =
     selectedCategory === "all"
       ? productList
@@ -45,7 +47,7 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
       >
-        <Slider />
+        <Slider favoriteProducts={favoriteProducts} />
         <Category
           onCategoryPress={handleCategoryPress}
           selectedCategory={selectedCategory}

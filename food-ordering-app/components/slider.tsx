@@ -1,9 +1,13 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
 import Button from "@/components/ui/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-const Slider = () => {
+import { useRouter } from "expo-router";
+import { Product } from "@/type";
+
+const Slider = ({ favoriteProducts }: { favoriteProducts: Product[] }) => {
   const { t } = useTranslation();
+  const router = useRouter();
   return (
     <View className="relative min-h-80">
       <Image
@@ -27,9 +31,19 @@ const Slider = () => {
             />
           </View>
           <View className="flex flex-row gap-4">
-            <View className="flex justify-center items-center rounded-full size-10 border-white border-2">
-              <Ionicons name="search" size={20} color={"white"} />
-            </View>
+            <Pressable
+              onPress={() => router.push("/favorite")}
+              className="flex justify-center items-center relative rounded-full size-10 border-white border-2"
+            >
+              <Ionicons name="heart-outline" size={20} color={"white"} />
+              {favoriteProducts.length > 0 && (
+                <View className="absolute -right-1 -top-1 bg-red-500 rounded-full w-5 h-5 items-center justify-center">
+                  <Text className="text-white text-[10px] font-bold">
+                    {favoriteProducts.length}
+                  </Text>
+                </View>
+              )}
+            </Pressable>
             <View className="flex justify-center items-center rounded-full size-10 border-white border-2">
               <Ionicons
                 name="notifications-outline"
@@ -40,8 +54,12 @@ const Slider = () => {
           </View>
         </View>
         <View className="flex gap-2">
-          <Text className="text-4xl font-bold text-white">{t("home.headline1")}</Text>
-          <Text className="text-4xl font-bold text-white">{t("home.headline2")}</Text>
+          <Text className="text-4xl font-bold text-white">
+            {t("home.headline1")}
+          </Text>
+          <Text className="text-4xl font-bold text-white">
+            {t("home.headline2")}
+          </Text>
         </View>
       </View>
     </View>
