@@ -17,7 +17,7 @@ import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 const ForgotPassword = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState<string>("");
   const router = useRouter();
 
@@ -44,11 +44,19 @@ const ForgotPassword = () => {
           showsVerticalScrollIndicator={false}
         >
           <View className="flex-1 justify-center">
-            <View className="mb-8">
+            <View
+              className={`mb-6 flex  ${
+                i18n.language == "fa" ? "justify-end items-end w-full" : null
+              }`}
+            >
               <Text className="text-4xl font-bold text-black mb-2">
                 {t("auth.forgotPassword")}
               </Text>
-              <Text className="text-base text-gray-500">
+              <Text
+                className={`${
+                  i18n.language == "fa" ? "text-right" : null
+                } text-base text-gray-500`}
+              >
                 {t("auth.forgotPasswordSubtitle")}
               </Text>
             </View>

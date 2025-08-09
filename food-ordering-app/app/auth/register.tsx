@@ -15,23 +15,31 @@ import Toast from "react-native-toast-message";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 const Register = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const registerUser = async () => {
     await dispatch(login({ email, userName, password, isRegistered: "true" }));
-    Toast.show({ type: "success", text1: "Register success" });
+    Toast.show({
+      type: "success",
+      text1: "Register success",
+      text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
+    });
     router.replace("/(tabs)");
   };
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
-        <View className="mb-6">
+        <View
+          className={`mb-6 flex  ${
+            i18n.language == "fa" ? "justify-end items-end w-full" : null
+          }`}
+        >
           <Text className="text-4xl font-bold text-black">
             {t("auth.createYourNewAccount")}
           </Text>
@@ -61,7 +69,11 @@ const Register = () => {
             value={password}
             onChangeText={setPassword}
           />
-          <View className="flex flex-row justify-between items-center">
+          <View
+            className={`flex flex-row  ${
+              i18n.language == "fa" ? "flex-row-reverse gap-1" : null
+            }`}
+          >
             <TouchableOpacity
               className="flex-row items-center gap-2"
               onPress={() => setChecked(!checked)}
@@ -75,7 +87,9 @@ const Register = () => {
             </TouchableOpacity>
             <Text className="text-right">
               {t("auth.iAgreeWith")}
-              <Text className="text-[#FE8C00]">{t("auth.termsOfService")}</Text>{" "}
+              <Text className="text-[#FE8C00]">
+                {t("auth.termsOfService")}
+              </Text>{" "}
               {t("auth.and")}{" "}
               <Text className="text-[#FE8C00]">{t("auth.privacyPolicy")}</Text>
             </Text>

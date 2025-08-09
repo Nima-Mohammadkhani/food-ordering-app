@@ -17,26 +17,42 @@ const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
   const loading = useSelector((state: RootState) => state.auth.loading);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const loginUser = async () => {
     if (user && user.isRegistered) {
       if (user.userName === username && user.password === password) {
         dispatch(login({ username, password, isRegistered: "true" }));
-        Toast.show({ type: "success", text1: t("auth.loginSuccess") });
+        Toast.show({
+          type: "success",
+          text1: t("auth.loginSuccess"),
+          text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
+        });
         router.replace("/(tabs)");
       } else {
-        Toast.show({ type: "error", text1: t("auth.invalidCredentials") });
+        Toast.show({
+          type: "error",
+          text1: t("auth.invalidCredentials"),
+          text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
+        });
       }
     } else {
-      Toast.show({ type: "error", text1: t("auth.registerFirst") });
+      Toast.show({
+        type: "error",
+        text1: t("auth.registerFirst"),
+        text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
+      });
     }
   };
   const forgetPassword = () => {
     if (user && user.isRegistered) {
       router.push("/auth/forgetPassword");
     } else {
-      Toast.show({ type: "error", text1: t("auth.registerFirst") });
+      Toast.show({
+        type: "error",
+        text1: t("auth.registerFirst"),
+        text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
+      });
     }
   };
 
@@ -44,14 +60,28 @@ const Login = () => {
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
-        <View className="mb-6">
-          <Text className="text-4xl font-bold text-black">{t("auth.loginTitle1")}</Text>
-          <Text className="text-4xl font-bold text-black mb-2">{t("auth.loginTitle2")}</Text>
-          <Text className="text-base text-gray-500">{t("auth.loginSubtitle")}</Text>
+        <View
+          className={`mb-6 flex  ${
+            i18n.language == "fa" ? "justify-end items-end w-full" : null
+          }`}
+        >
+          <Text className="text-4xl font-bold text-black">
+            {t("auth.loginTitle1")}
+          </Text>
+          <Text className="text-4xl font-bold text-black mb-2">
+            {t("auth.loginTitle2")}
+          </Text>
+          <Text className="text-base text-gray-500">
+            {t("auth.loginSubtitle")}
+          </Text>
         </View>
 
         <View className="gap-4">
-          <Input label={t("auth.username")} value={username} onChangeText={setUsername} />
+          <Input
+            label={t("auth.username")}
+            value={username}
+            onChangeText={setUsername}
+          />
           <Input
             label={t("auth.password")}
             value={password}
@@ -77,7 +107,9 @@ const Login = () => {
 
         <View className="flex-row items-center">
           <View className="flex-1 h-px bg-neutral-300" />
-          <Text className="mx-4 text-neutral-500 text-sm">{t("auth.orSignInWith")}</Text>
+          <Text className="mx-4 text-neutral-500 text-sm">
+            {t("auth.orSignInWith")}
+          </Text>
           <View className="flex-1 h-px bg-neutral-300" />
         </View>
 
@@ -93,7 +125,11 @@ const Login = () => {
           </View>
         </View>
 
-        <View className="flex-row justify-center gap-1">
+        <View
+          className={`${
+            i18n.language == "fa" ? "flex-row-reverse " : "flex-row"
+          }  justify-center gap-1`}
+        >
           <Text>{t("auth.noAccountQuestion")}</Text>
           <Text
             onPress={() => router.push("/auth/register")}

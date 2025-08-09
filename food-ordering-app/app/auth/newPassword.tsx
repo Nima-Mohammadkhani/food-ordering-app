@@ -20,7 +20,7 @@ const NewPassword = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
@@ -32,23 +32,26 @@ const NewPassword = () => {
           showsVerticalScrollIndicator={false}
         >
           <View className="flex-1 justify-center gap-6">
-            <View>
+            <View
+              className={`${
+                i18n.language == "fa" ? "flex justify-end items-end" : null
+              }`}
+            >
               <Text className="text-4xl font-bold text-black mb-2">
-                Reset Password
+                {t("auth.resetTitle")}
               </Text>
               <Text className="text-base text-gray-500">
-                Your new password must be different from the previously used
-                password
+                {t("auth.resetSubtitle")}
               </Text>
             </View>
             <View className="gap-4">
               <Input
-                label="New Password"
+                label={t("auth.NewPassword")}
                 value={newPassword}
                 onChangeText={setNewPassword}
               />
               <Input
-                label="Confirm Password"
+                label={t("auth.Confirm Password")}
                 secureToggle
                 secureTextEntry
                 value={password}
@@ -64,7 +67,7 @@ const NewPassword = () => {
         >
           <View className="pb-6 pt-4">
             <Button
-              title="Continue"
+              title={t("auth.continue")}
               size="md"
               textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"

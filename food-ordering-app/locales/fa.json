@@ -226,6 +226,10 @@
     "orRegisterWith": "یا ثبت‌نام با",
     "registerSuccess": "ثبت‌نام موفقیت‌آمیز بود",
     "emailAddress": "ایمیل",
+    "resetTitle": "بازیابی رمز عبور",
+    "resetSubtitle": "رمز عبور جدید شما باید با رمز عبور قبلی متفاوت باشد",
+    "NewPassword": "رمز جدید",
+    "Confirm Password": "تکرار رمز",
     "and": "و",
     "onboarding": {
       "1": {

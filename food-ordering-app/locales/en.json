@@ -226,6 +226,10 @@
     "orRegisterWith": "Or Register with",
     "registerSuccess": "Register success",
     "emailAddress": "Email Address",
+    "resetTitle": " Reset Password",
+    "resetSubtitle": "Your new password must be different from the previously used password",
+    "NewPassword":"New Password",
+    "Confirm Password":"Confirm Password",
     "and": "and",
     "onboarding": {
       "1": {

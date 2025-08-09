@@ -14,8 +14,12 @@ import { useTranslation } from "react-i18next";
 const Index = () => {
   const [step, setStep] = useState<number>(0);
   const router = useRouter();
-  const { t } = useTranslation();
-  const onboarding: { title: string; description: string; image: ImageSourcePropType }[] = useMemo(
+  const { t, i18n } = useTranslation();
+  const onboarding: {
+    title: string;
+    description: string;
+    image: ImageSourcePropType;
+  }[] = useMemo(
     () => [
       {
         title: t("auth.onboarding.1.title"),
