@@ -24,15 +24,7 @@ const Input = forwardRef<TextInput, InputProps>(
     const { i18n } = useTranslation();
     return (
       <View className={`w-full mb-4 ${containerClassName}`}>
-        {label && (
-          <Text
-            className={`${
-              i18n.language == "fa" ? "self-end" : null
-            } mb-1 text-gray-700`}
-          >
-            {label}
-          </Text>
-        )}
+        {label && <Text className="mb-1 text-gray-700">{label}</Text>}
 
         <View
           className={`flex-row items-center border rounded-lg px-3 ${
