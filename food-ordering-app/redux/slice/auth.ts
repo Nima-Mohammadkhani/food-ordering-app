@@ -17,7 +17,10 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.user = null;
-      AsyncStorage.removeItem("user");
+      AsyncStorage.multiRemove([
+        "user",
+        "persist:product",
+      ]);
     },
     loadUser: (state, action: PayloadAction<AuthUser | null>) => {
       state.user = action.payload;

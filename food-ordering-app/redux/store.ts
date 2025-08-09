@@ -7,7 +7,7 @@ import { persistReducer, persistStore } from "redux-persist";
 const productPersistConfig = {
   key: "product",
   storage: AsyncStorage,
-  whitelist: ["productCartList", "activeOrder"],
+  whitelist: ["productCartList", "activeOrder", "favoriteProducts"],
 };
 
 const persistedProductReducer = persistReducer(productPersistConfig, productReducer);
