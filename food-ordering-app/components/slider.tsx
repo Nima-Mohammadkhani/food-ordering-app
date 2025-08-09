@@ -1,7 +1,9 @@
 import { View, Image, Text } from "react-native";
 import Button from "@/components/ui/Button";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 const Slider = () => {
+  const { t } = useTranslation();
   return (
     <View className="relative min-h-80">
       <Image
@@ -15,12 +17,12 @@ const Slider = () => {
             <Button
               iconRight="chevron-down"
               textClassName="text-white"
-              title="Your Location"
+              title={t("home.yourLocation")}
             />
             <Button
               iconLeft="location-outline"
               textClassName="text-white"
-              title="tehran"
+              title={t("home.city")}
               className="justify-between"
             />
           </View>
@@ -38,10 +40,8 @@ const Slider = () => {
           </View>
         </View>
         <View className="flex gap-2">
-          <Text className="text-4xl font-bold text-white">
-            Provide the best
-          </Text>
-          <Text className="text-4xl font-bold text-white">food for you</Text>
+          <Text className="text-4xl font-bold text-white">{t("home.headline1")}</Text>
+          <Text className="text-4xl font-bold text-white">{t("home.headline2")}</Text>
         </View>
       </View>
     </View>

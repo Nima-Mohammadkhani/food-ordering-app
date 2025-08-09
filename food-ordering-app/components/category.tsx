@@ -1,36 +1,33 @@
-import {
-  View,
-  Image,
-  ImageSourcePropType,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import { CategoryItem, CategoryProps } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const Category = ({
   onCategoryPress,
   onSeeAllPress,
   selectedCategory = "all",
 }: CategoryProps) => {
+  const { t } = useTranslation();
+
   const category: CategoryItem[] = [
     {
       id: 1,
-      name: "Burger",
+      name: t("home.categories.burger"),
       image: require("../assets/images/category/burger.png"),
     },
     {
       id: 2,
-      name: "Sandwich",
+      name: t("home.categories.sandwich"),
       image: require("../assets/images/category/toast.png"),
     },
     {
       id: 3,
-      name: "Dessert",
+      name: t("home.categories.dessert"),
       image: require("../assets/images/category/drink.png"),
     },
     {
       id: 4,
-      name: "Pizza",
+      name: t("home.categories.pizza"),
       image: require("../assets/images/category/pizza.png"),
     },
   ];
@@ -38,9 +35,9 @@ const Category = ({
   return (
     <View className="flex justify-between items-center gap-4">
       <View className="flex-row justify-between items-center w-full px-6 py-2">
-        <Text className="font-semibold text-xl">Find by Category</Text>
+        <Text className="font-semibold text-xl">{t("home.findByCategory")}</Text>
         <TouchableOpacity onPress={onSeeAllPress}>
-          <Text className="text-[#FE8C00] font-medium">See All</Text>
+          <Text className="text-[#FE8C00] font-medium">{t("home.seeAll")}</Text>
         </TouchableOpacity>
       </View>
       <View className="flex flex-row justify-between w-full px-6">

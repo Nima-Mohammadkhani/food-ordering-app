@@ -9,12 +9,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Button from "./ui/Button";
 import { Product } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const { width: screenWidth } = Dimensions.get("window");
 const cardWidth = (screenWidth - 48) / 2;
 
 const ProductCart = ({ item }: { item: Product }) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handlePress = () => {
     router.push(`/product/${item.id}`);
@@ -47,7 +49,7 @@ const ProductCart = ({ item }: { item: Product }) => {
             numberOfLines={2}
             style={{ lineHeight: 18 }}
           >
-            {item.title}
+            {t(`products.${item.id}.title`, { defaultValue: item.title })}
           </Text>
 
           <View className="flex flex-row justify-between items-center">
@@ -60,7 +62,8 @@ const ProductCart = ({ item }: { item: Product }) => {
             <View className="flex flex-row items-center gap-1">
               <Ionicons name="location-outline" color="orange" size={12} />
               <Text className="font-medium text-xs text-gray-600">
-                {item.distance}m
+                {item.distance}
+                {t("product.distanceUnit")}
               </Text>
             </View>
           </View>
@@ -68,7 +71,7 @@ const ProductCart = ({ item }: { item: Product }) => {
 
         <View className="mt-2">
           <Text className="text-[#FE8C00] font-bold text-base">
-            ${item.price.toFixed(2)}
+            {t("product.pricePattern", { price: item.price.toFixed(2) })}
           </Text>
         </View>
       </View>

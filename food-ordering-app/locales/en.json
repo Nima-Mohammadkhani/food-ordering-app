@@ -5,6 +5,46 @@
     "chat": "Chat",
     "profile": "Profile"
   },
+  "product": {
+    "distanceUnit": "m",
+    "pricePattern": "$ {{price}}"
+  },
+  "products": {
+    "1": { "title": "Pepperoni Pizza" },
+    "2": { "title": "Cheeseburger Deluxe" },
+    "3": { "title": "French Fries" },
+    "4": { "title": "Grilled Chicken Sandwich" },
+    "5": { "title": "Caesar Salad" },
+    "6": { "title": "BBQ Chicken Wings" },
+    "7": { "title": "Vanilla Milkshake" },
+    "8": { "title": "Margarita Pizza" },
+    "9": { "title": "Chicken Nuggets" },
+    "10": { "title": "Chocolate Sundae" },
+    "11": { "title": "Spicy Chicken Burger" },
+    "12": { "title": "Onion Rings" },
+    "13": { "title": "Iced Tea" },
+    "14": { "title": "Fish Sandwich" },
+    "15": { "title": "Mozzarella Sticks" },
+    "16": { "title": "Grilled Chicken Wrap" },
+    "17": { "title": "Taco Trio" },
+    "18": { "title": "Strawberry Smoothie" },
+    "19": { "title": "Bacon Cheeseburger" },
+    "20": { "title": "Chocolate Chip Cookies" }
+  },
+  "home": {
+    "yourLocation": "Your Location",
+    "city": "Tehran",
+    "headline1": "Provide the best",
+    "headline2": "food for you",
+    "findByCategory": "Find by Category",
+    "seeAll": "See All",
+    "categories": {
+      "burger": "Burger",
+      "sandwich": "Sandwich",
+      "dessert": "Dessert",
+      "pizza": "Pizza"
+    }
+  },
   "auth": {
     "login": "Login",
     "register": "Register",
