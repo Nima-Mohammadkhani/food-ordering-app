@@ -45,6 +45,45 @@
       "pizza": "Pizza"
     }
   },
+  "profile": {
+    "title": "Profile",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "e.g. Ali",
+    "birthDate": "Date of birth",
+    "birthDatePlaceholder": "19/06/2000",
+    "gender": "Gender",
+    "genderPlaceholder": "Male",
+    "phone": "Phone",
+    "phonePlaceholder": "09123456789",
+    "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "save": "Save",
+    "saved": "Profile saved",
+    "imageUpdated": "Profile image updated",
+    "permissionRequired": "Permission to access media library is required!"
+  },
+  "settings": {
+    "title": "Settings",
+    "profileSection": "PROFILE",
+    "otherSection": "OTHER",
+    "pushNotifications": "Push Notification",
+    "location": "Location",
+    "language": "Language",
+    "selectLanguage": "Select Language",
+    "select": "Select",
+    "about": "About App",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "logout": "Log Out",
+    "logoutTitle": "Log Out",
+    "logoutQuestion": "Do you want to log out?",
+    "cancel": "Cancel",
+    "loggedOut": "Logged out successfully",
+    "languages": {
+      "en": "English",
+      "fa": "Persian"
+    }
+  },
   "auth": {
     "login": "Login",
     "register": "Register",

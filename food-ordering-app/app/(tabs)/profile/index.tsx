@@ -19,6 +19,7 @@ import Header from "@/components/ui/header";
 import Input from "@/components/ui/Input";
 import { logout, updateUser } from "@/redux/slice/auth";
 import { RootState, UserProfile } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const ProfileScreen = () => {
   const reduxUser = useSelector((state: RootState) => state.auth.user);
@@ -35,6 +36,7 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (reduxUser) {
@@ -55,7 +57,7 @@ const ProfileScreen = () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
+      alert(t("profile.permissionRequired"));
       return;
     }
 
@@ -71,7 +73,7 @@ const ProfileScreen = () => {
       if (uri) {
         setProfileImage(uri);
         dispatch(updateUser({ avatarUri: uri }));
-        Toast.show({ type: "success", text1: "Profile image updated" });
+        Toast.show({ type: "success", text1: t("profile.imageUpdated") });
       }
     }
   };
@@ -84,7 +86,7 @@ const ProfileScreen = () => {
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <Header
-        title="Profile"
+        title={t("profile.title")}
         rightIconName="settings-outline"
         onRightPress={() => router.push("/(tabs)/profile/settings" as Href)}
       />
@@ -112,33 +114,33 @@ const ProfileScreen = () => {
 
           <View className="flex gap-4">
             <Input
-              label="Full Name"
-              placeholder="example Tom"
+              label={t("profile.fullName")}
+              placeholder={t("profile.fullNamePlaceholder")}
               value={user.fullName}
               onChangeText={(val) => handleInputChange("fullName", val)}
             />
             <Input
-              label="Date of birth"
-              placeholder="19/06/1999"
+              label={t("profile.birthDate")}
+              placeholder={t("profile.birthDatePlaceholder")}
               value={user.birthDate}
               onChangeText={(val) => handleInputChange("birthDate", val)}
             />
             <Input
-              label="Gender"
-              placeholder="Male"
+              label={t("profile.gender")}
+              placeholder={t("profile.genderPlaceholder")}
               value={user.gender}
               onChangeText={(val) => handleInputChange("gender", val)}
             />
             <Input
-              label="Phone"
-              placeholder="09123456789"
+              label={t("profile.phone")}
+              placeholder={t("profile.phonePlaceholder")}
               keyboardType="phone-pad"
               value={user.phone}
               onChangeText={(val) => handleInputChange("phone", val)}
             />
             <Input
-              label="Email"
-              placeholder="example@gmail.com"
+              label={t("profile.email")}
+              placeholder={t("profile.emailPlaceholder")}
               keyboardType="email-address"
               value={user.email}
               onChangeText={(val) => handleInputChange("email", val)}
@@ -146,7 +148,7 @@ const ProfileScreen = () => {
           </View>
 
           <Button
-            title="Save"
+            title={t("profile.save")}
             size="md"
             textClassName="text-white"
             className="bg-[#FE8C00] rounded-full"
@@ -161,7 +163,7 @@ const ProfileScreen = () => {
                   email: user.email,
                 })
               );
-              Toast.show({ type: "success", text1: "Profile saved" });
+              Toast.show({ type: "success", text1: t("profile.saved") });
             }}
           />
         </View>

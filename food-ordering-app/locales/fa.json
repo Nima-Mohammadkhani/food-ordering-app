@@ -45,6 +45,45 @@
       "pizza": "پیتزا"
     }
   },
+  "profile": {
+    "title": "پروفایل",
+    "fullName": "نام و نام خانوادگی",
+    "fullNamePlaceholder": "مثلاً علی",
+    "birthDate": "تاریخ تولد",
+    "birthDatePlaceholder": "2000/06/19",
+    "gender": "جنسیت",
+    "genderPlaceholder": "مرد",
+    "phone": "تلفن",
+    "phonePlaceholder": "09123456789",
+    "email": "ایمیل",
+    "emailPlaceholder": "example@gmail.com",
+    "save": "ذخیره",
+    "saved": "پروفایل ذخیره شد",
+    "imageUpdated": "تصویر پروفایل به‌روزرسانی شد",
+    "permissionRequired": "اجازه دسترسی به گالری لازم است!"
+  },
+  "settings": {
+    "title": "تنظیمات",
+    "profileSection": "پروفایل",
+    "otherSection": "سایر",
+    "pushNotifications": "اعلان‌ها",
+    "location": "موقعیت مکانی",
+    "language": "زبان",
+    "selectLanguage": "انتخاب زبان",
+    "select": "انتخاب",
+    "about": "درباره اپلیکیشن",
+    "privacyPolicy": "حریم خصوصی",
+    "termsAndConditions": "قوانین و مقررات",
+    "logout": "خروج",
+    "logoutTitle": "خروج از حساب",
+    "logoutQuestion": "آیا می‌خواهید خارج شوید؟",
+    "cancel": "انصراف",
+    "loggedOut": "با موفقیت خارج شدید",
+    "languages": {
+      "en": "انگلیسی",
+      "fa": "فارسی"
+    }
+  },
   "auth": {
     "login": "ورود",
     "register": "ثبت‌نام",

@@ -5,6 +5,7 @@ import { I18nManager } from 'react-native';
 
 import en from './en.json';
 import fa from './fa.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const supportedLanguages = ['en', 'fa'] as const;
 type SupportedLanguage = (typeof supportedLanguages)[number];
@@ -34,6 +35,16 @@ i18n.use(initReactI18next).init({
   react: { useSuspense: false },
   returnNull: false,
 });
+
+// If a stored language exists, switch to it after init
+(async () => {
+  try {
+    const stored = await AsyncStorage.getItem('appLanguage');
+    if (stored && supportedLanguages.includes(stored as SupportedLanguage)) {
+      i18n.changeLanguage(stored);
+    }
+  } catch {}
+})();
 
 export default i18n;
 
