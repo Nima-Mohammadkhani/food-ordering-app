@@ -25,11 +25,13 @@ const LiveDeliveryMap = () => {
   };
 
   useEffect(() => {
+    let subscription: Location.LocationSubscription | null = null;
+
     const subscribeToLocation = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") return;
 
-      Location.watchPositionAsync(
+      subscription = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.High,
           timeInterval: 3000,
@@ -54,6 +56,12 @@ const LiveDeliveryMap = () => {
     };
 
     subscribeToLocation();
+
+    return () => {
+      if (subscription) {
+        subscription.remove();
+      }
+    };
   }, []);
 
   const activeOrder = useSelector(
@@ -100,7 +108,7 @@ const LiveDeliveryMap = () => {
           <View className="flex-1">
             <Text className="font-bold text-base">{t("cart.driver")}</Text>
             <Text className="text-xs text-gray-500">
-              {t("cart.orderId", { id: 213752 })}
+              {t("cart.orderId", { id: activeOrder?.id ?? 0 })}
             </Text>
           </View>
           <TouchableOpacity className="bg-green-600 p-2 rounded-full ml-2">
@@ -132,9 +140,14 @@ const LiveDeliveryMap = () => {
           <View className="flex-1 pr-3">
             <Text className="font-semibold mb-1">{t("cart.order")}</Text>
             {activeOrder?.items?.map((it) => (
-              <Text key={it.id} className="text-sm text-gray-600">
-                {it.quantity} x{" "}
-                {t(`products.${it.id}.title`, { defaultValue: it.title })}
+              <Text
+                key={it.id ?? String(Math.random())}
+                className="text-sm text-gray-600"
+              >
+                {it?.quantity ?? 0} x{" "}
+                {t(`products.${it.id}.title`, {
+                  defaultValue: it?.title ?? "",
+                })}
               </Text>
             ))}
           </View>
