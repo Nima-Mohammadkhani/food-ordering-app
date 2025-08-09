@@ -8,12 +8,19 @@
 [![Expo](https://img.shields.io/badge/Expo-53-000020.svg?style=for-the-badge&logo=expo)](https://expo.dev/)
 [![Redux](https://img.shields.io/badge/Redux-Toolkit-764ABC.svg?style=for-the-badge&logo=redux)](https://redux-toolkit.js.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6.svg?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![i18n](https://img.shields.io/badge/i18n-Multilingual-FF6B6B.svg?style=for-the-badge&logo=googletranslate)](https://react.i18next.com/)
 
 ---
 
 </div>
 
 ## Features
+
+**Multilingual Support**
+- Full Persian (فارسی) and English language support
+- Seamless language switching through settings
+- Internationalization powered by React i18next
+- Right-to-left (RTL) layout support for Persian
 
 **User Profile & Settings**
 - Edit user information and change profile picture
@@ -23,6 +30,7 @@
 **Shopping Experience**
 - Browse home, categories, and product details
 - Shopping cart with add/remove items and quantity management
+- Favorites/bookmarks system for saving preferred items
 - Active discount code system (use code `food` for 25% discount)
 - Seamless payment flow with success notifications
 
@@ -34,6 +42,7 @@
 
 **Data Persistence**
 - Shopping cart preserved between app sessions
+- Favorites/bookmarks maintained across sessions
 - Active orders maintained after app closure
 - Reliable data storage with AsyncStorage
 
@@ -48,6 +57,7 @@
 ![React Redux](https://img.shields.io/badge/-React_Redux-764ABC?style=flat-square&logo=redux&logoColor=white)
 ![Redux Persist](https://img.shields.io/badge/-Redux_Persist-764ABC?style=flat-square&logo=redux&logoColor=white)
 
+![React i18next](https://img.shields.io/badge/-React_i18next-26A69A?style=flat-square&logo=googletranslate&logoColor=white)
 ![NativeWind](https://img.shields.io/badge/-NativeWind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 ![React Native Maps](https://img.shields.io/badge/-React_Native_Maps-4285F4?style=flat-square&logo=googlemaps&logoColor=white)
 ![Expo Image Picker](https://img.shields.io/badge/-Expo_Image_Picker-000020?style=flat-square&logo=expo&logoColor=white)
@@ -71,14 +81,19 @@ food-ordering-app/
 │       │   └── map.tsx            # Order tracking map
 │       ├── profile/
 │       │   ├── index.tsx          # User profile
-│       │   └── settings.tsx       # App settings
+│       │   └── settings.tsx       # App settings + language switcher
+│       ├── favorites/
+│       │   └── index.tsx          # Bookmarked/favorite items
 │       └── chat/ ...
 ├── components/                     # Reusable UI components
 ├── redux/
 │   ├── slice/
 │   │   ├── auth.ts                # Authentication state
-│   │   └── product.ts             # Cart, orders, payment calculations
+│   │   └── product.ts             # Cart, orders, favorites, payment calculations
 │   └── store.ts                   # Redux store + persistence config
+├── locales/                       # Translation files
+│   ├── en.json                    # English translations
+│   └── fa.json                    # Persian translations
 ├── type/                          # TypeScript definitions
 └── assets/                        # Images, icons, fonts
 ```
@@ -191,9 +206,20 @@ npx eas build -p ios --profile production
 
 ## Implementation Notes
 
+**Internationalization (i18n)**
+- React i18next integration for Persian (فارسی) and English language support
+- Dynamic language switching through settings panel
+- RTL layout support for Persian language
+- Translation files stored in `locales/` directory
+
+**Favorites/Bookmarks System**
+- Users can bookmark favorite food items
+- Persistent favorites storage using Redux Persist
+- Quick access to saved items through dedicated favorites screen
+
 **Persistent Shopping Cart**
-- Uses `redux-persist` with AsyncStorage to store `productCartList` and `activeOrder`
-- Cart contents and active orders survive app restarts
+- Uses `redux-persist` with AsyncStorage to store `productCartList`, `activeOrder`, and `favorites`
+- Cart contents, favorites, and active orders survive app restarts
 
 **Payment Flow**
 - Clicking `Pay` creates an active order and displays success Toast
