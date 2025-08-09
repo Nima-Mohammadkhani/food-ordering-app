@@ -3,8 +3,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { Text, View } from "react-native";
 import { RootState } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const TabsLayout = () => {
+  const { t } = useTranslation();
   const productCartList = useSelector(
     (state: RootState) => state.product.productCartList
   );
@@ -25,7 +27,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: "home",
+          title: t("tabs.home"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
@@ -34,7 +36,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="cart/index"
         options={{
-          title: "cart",
+          title: t("tabs.cart"),
           tabBarIcon: ({ color, size }) => (
             <View className="relative">
               <Ionicons name="cart-outline" size={size} color={color} />
@@ -52,7 +54,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="chat/index"
         options={{
-          title: "chat",
+          title: t("tabs.chat"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons
               name="chatbubble-ellipses-outline"
@@ -65,7 +67,7 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="profile/index"
         options={{
-          title: "profile",
+          title: t("tabs.profile"),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
           ),

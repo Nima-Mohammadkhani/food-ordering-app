@@ -1,0 +1,34 @@
+{
+  "tabs": {
+    "home": "Home",
+    "cart": "Cart",
+    "chat": "Chat",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "onboarding": {
+      "1": {
+        "title": "Discover top restaurants near you",
+        "description": "Browse a wide range of local favorites and hidden gems. Find the food you love."
+      },
+      "2": {
+        "title": "Order in just a few taps",
+        "description": "Choose your meal, customize it, and place your order in seconds. No calls, no hassle."
+      },
+      "3": {
+        "title": "Fast and secure delivery",
+        "description": "Track your order in real-time and enjoy hot meals delivered right to your door."
+      }
+    }
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back"
+  }
+}

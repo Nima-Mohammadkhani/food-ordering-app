@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Image,
   ImageSourcePropType,
@@ -9,34 +9,32 @@ import {
   Text,
   View,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const [step, setStep] = useState<number>(0);
   const router = useRouter();
-  const onboarding: {
-    title: string;
-    description: string;
-    image: ImageSourcePropType;
-  }[] = [
-    {
-      title: "Discover top restaurants near you",
-      description:
-        "Browse a wide range of local favorites and hidden gems. Find the food you love.",
-      image: require("../../assets/images/onboarding/onboarding.png"),
-    },
-    {
-      title: "Order in just a few\n taps",
-      description:
-        "Choose your meal, customize it, and place your order in seconds. No calls, no hassle.",
-      image: require("../../assets/images/onboarding/onboarding2.png"),
-    },
-    {
-      title: "Fast and secure delivery",
-      description:
-        "Track your order in real-time and enjoy hot meals delivered right to your door.",
-      image: require("../../assets/images/onboarding/onboarding3.png"),
-    },
-  ];
+  const { t } = useTranslation();
+  const onboarding: { title: string; description: string; image: ImageSourcePropType }[] = useMemo(
+    () => [
+      {
+        title: t("auth.onboarding.1.title"),
+        description: t("auth.onboarding.1.description"),
+        image: require("../../assets/images/onboarding/onboarding.png"),
+      },
+      {
+        title: t("auth.onboarding.2.title"),
+        description: t("auth.onboarding.2.description"),
+        image: require("../../assets/images/onboarding/onboarding2.png"),
+      },
+      {
+        title: t("auth.onboarding.3.title"),
+        description: t("auth.onboarding.3.description"),
+        image: require("../../assets/images/onboarding/onboarding3.png"),
+      },
+    ],
+    [t]
+  );
 
   const current = onboarding[step];
   return (
@@ -72,7 +70,7 @@ const Index = () => {
               }`}
             >
               <Button
-                title="Back"
+                title={t("common.back")}
                 iconLeft="arrow-back"
                 className={`bg-transparent text-white ${
                   step == 0 ? "hidden" : "block"
@@ -81,7 +79,7 @@ const Index = () => {
                 onPress={() => setStep((prev) => prev - 1)}
               />
               <Button
-                title="Next"
+                title={t("common.next")}
                 iconRight="arrow-forward"
                 className="bg-transparent text-white"
                 textClassName="text-white font-bold"

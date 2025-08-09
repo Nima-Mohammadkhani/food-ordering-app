@@ -11,6 +11,7 @@ import { StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import "../global.css";
 import { RootState } from "@/type";
+import "../locales";
 
 function RootLayoutInner() {
   const dispatch = useDispatch();
