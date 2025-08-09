@@ -51,17 +51,18 @@ const Settings = () => {
   };
 
   const applyLanguage = async (lang: "en" | "fa") => {
-    await i18n.changeLanguage(lang);
     await AsyncStorage.setItem("appLanguage", lang);
-    setLanguage(lang);
-    setLangModalVisible(false);
 
     const enableRtl = lang === "fa";
     I18nManager.allowRTL(enableRtl);
     I18nManager.forceRTL(enableRtl);
 
+    await i18n.changeLanguage(lang);
+    setLanguage(lang);
+    setLangModalVisible(false);
+
     if (Platform.OS === "web") {
-      (globalThis as unknown as { location: Location }).location.reload();
+      location.reload();
     } else {
       DevSettings.reload();
     }
