@@ -15,17 +15,21 @@ import {
 import { createOrderFromCart } from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
 import { RootState } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const CartScreen = () => {
-  const productCartList = useSelector((state: RootState) => state.product.productCartList);
+  const productCartList = useSelector(
+    (state: RootState) => state.product.productCartList
+  );
   const dispatch = useDispatch();
   const router = useRouter();
   const [promo, setPromo] = useState<string>("");
   const [discountPercent, setDiscountPercent] = useState<number>(0);
+  const { t } = useTranslation();
 
   const removeFromCart = async (productId: number) => {
     await dispatch(removeItemFromCart(productId));
-    Toast.show({ type: "success", text1: "Removed from cart" });
+    Toast.show({ type: "success", text1: t("cart.removedFromCart") });
   };
 
   const handleIncrementQuantity = async (productId: number) => {
@@ -37,7 +41,7 @@ const CartScreen = () => {
   };
 
   const unpaidItems = useMemo(
-    () => productCartList.filter((it) => it.status !== 'delivering'),
+    () => productCartList.filter((it) => it.status !== "delivering"),
     [productCartList]
   );
   const subtotal = unpaidItems.reduce(
@@ -45,10 +49,7 @@ const CartScreen = () => {
     0
   );
 
-  const totalItems = unpaidItems.reduce(
-    (acc, item) => acc + item.quantity,
-    0
-  );
+  const totalItems = unpaidItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const discountAmount = useMemo(
     () => +(subtotal * (discountPercent / 100)).toFixed(2),
@@ -63,24 +64,27 @@ const CartScreen = () => {
     if (!promo.trim()) return;
     if (promo.trim().toLowerCase() === "food") {
       setDiscountPercent(25);
-      Toast.show({ type: "success", text1: "Promo applied (25%)" });
+      Toast.show({
+        type: "success",
+        text1: t("cart.promoApplied", { percent: 25 }),
+      });
     } else {
       setDiscountPercent(0);
-      Toast.show({ type: "error", text1: "Invalid promo code" });
+      Toast.show({ type: "error", text1: t("cart.invalidPromo") });
     }
   };
 
   const handlePay = () => {
     if (unpaidItems.length === 0) return;
     dispatch(createOrderFromCart({ discountPercent }));
-    Toast.show({ type: "success", text1: "Payment successful" });
+    Toast.show({ type: "success", text1: t("cart.paymentSuccess") });
     router.push("/(tabs)/cart/map");
   };
 
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
-      <Header title="My Cart" />
+      <Header title={t("cart.myCart")} />
       {productCartList.length === 0 ? (
         <EmptyCartView />
       ) : (
@@ -90,13 +94,13 @@ const CartScreen = () => {
         >
           <View className="relative">
             <Input
-              placeholder="Promo Code..."
+              placeholder={t("cart.promoPlaceholder")}
               value={promo}
               onChangeText={setPromo}
               className="h-12"
             />
             <Button
-              title="Apply"
+              title={t("cart.apply")}
               size="sm"
               textClassName="text-white"
               className="bg-[#FE8C00] rounded-full absolute right-1 top-1.5"
@@ -117,32 +121,42 @@ const CartScreen = () => {
 
           <View className="bg-white flex-1 flex gap-6 border border-gray-200 rounded-lg p-4 mb-4 shadow-sm">
             <Text className="font-bold text-lg text-gray-900 mb-4">
-              Payment Summary
+              {t("cart.paymentSummary")}
             </Text>
             <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600">Total Items</Text>
+              <Text className="text-gray-600">{t("cart.totalItems")}</Text>
               <Text className="font-bold text-gray-900">
-                {totalItems} items
+                {t("cart.itemsCount", { count: totalItems })}
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600">Subtotal</Text>
-              <Text className="font-bold text-gray-900">${subtotal.toFixed(2)}</Text>
+              <Text className="text-gray-600">{t("cart.subtotal")}</Text>
+              <Text className="font-bold text-gray-900">
+                {t("product.pricePattern", { price: subtotal.toFixed(2) })}
+              </Text>
             </View>
             <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600">Delivery Fee</Text>
-              <Text className="font-bold text-gray-900">Free</Text>
+              <Text className="text-gray-600">{t("cart.deliveryFee")}</Text>
+              <Text className="font-bold text-gray-900">{t("cart.free")}</Text>
             </View>
             <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600">Discount</Text>
-              <Text className="font-bold text-[#FE8C00]">-${discountAmount.toFixed(2)}</Text>
+              <Text className="text-gray-600">{t("cart.discount")}</Text>
+              <Text className="font-bold text-[#FE8C00]">
+                {t("cart.discountAmountPattern", {
+                  amount: discountAmount.toFixed(2),
+                })}
+              </Text>
             </View>
             <View className="flex-row justify-between items-center">
-              <Text className="font-bold text-lg text-gray-900">Total</Text>
-              <Text className="font-bold text-xl text-gray-900">${totalPrice.toFixed(2)}</Text>
+              <Text className="font-bold text-lg text-gray-900">
+                {t("cart.total")}
+              </Text>
+              <Text className="font-bold text-xl text-gray-900">
+                {t("product.pricePattern", { price: totalPrice.toFixed(2) })}
+              </Text>
             </View>
             <Button
-              title="Pay"
+              title={t("cart.pay")}
               size="md"
               textClassName="text-white"
               className="bg-[#FE8C00] rounded-full"
