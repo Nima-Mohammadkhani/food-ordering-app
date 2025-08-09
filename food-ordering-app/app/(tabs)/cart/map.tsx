@@ -5,13 +5,14 @@ import * as Location from "expo-location";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LatLng, RootState } from "@/type";
 import { useTranslation } from "react-i18next";
+import formatCurrency from "@/utils/currency";
 import { useSelector } from "react-redux";
 
 const LiveDeliveryMap = () => {
   const [driverLocation, setDriverLocation] = useState<LatLng | null>(null);
   const [locationLoaded, setLocationLoaded] = useState<boolean>(false);
   const mapRef = useRef<MapView | null>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const restaurantLocation: LatLng = {
     latitude: 35.6892,
@@ -139,9 +140,10 @@ const LiveDeliveryMap = () => {
           </View>
           <View className="items-end">
             <Text className="font-bold text-lg">
-              {t("product.pricePattern", {
-                price: activeOrder?.total?.toFixed(2) || "0.00",
-              })}
+              {formatCurrency(
+                Number(activeOrder?.total?.toFixed(2) || "0"),
+                i18n.language
+              )}
             </Text>
             {activeOrder?.discountPercent ? (
               <Text className="text-xs text-gray-500">

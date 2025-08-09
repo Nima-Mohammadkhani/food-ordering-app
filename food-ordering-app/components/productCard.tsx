@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  Dimensions,
-  Pressable,
-} from "react-native";
+import { View, Text, Image, Dimensions, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import Button from "./ui/Button";
 import { Product } from "@/type";
+import formatCurrency from "@/utils/currency";
 import { useTranslation } from "react-i18next";
 
 const { width: screenWidth } = Dimensions.get("window");
@@ -16,7 +10,7 @@ const cardWidth = (screenWidth - 48) / 2;
 
 const ProductCart = ({ item }: { item: Product }) => {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handlePress = () => {
     router.push(`/product/${item.id}`);
@@ -71,7 +65,7 @@ const ProductCart = ({ item }: { item: Product }) => {
 
         <View className="mt-2">
           <Text className="text-[#FE8C00] font-bold text-base">
-            {t("product.pricePattern", { price: item.price.toFixed(2) })}
+            {formatCurrency(item.price, i18n.language)}
           </Text>
         </View>
       </View>

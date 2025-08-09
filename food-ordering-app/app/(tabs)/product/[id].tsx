@@ -23,6 +23,7 @@ import {
 import Toast from "react-native-toast-message";
 import { Product, RootState } from "@/type";
 import { useTranslation } from "react-i18next";
+import formatCurrency from "@/utils/currency";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -36,7 +37,7 @@ const ProductDetailScreen = () => {
     (state: RootState) => state.product.productList
   );
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const product = productList.find(
     (p: Product) => p.id === parseInt(id as string)
@@ -111,7 +112,7 @@ const ProductDetailScreen = () => {
             </Text>
           </View>
           <Text className="text-[#FE8C00] font-bold text-sm">
-            {t("product.pricePattern", { price: item.price.toFixed(2) })}
+            {formatCurrency(Number(item.price.toFixed(2)), i18n.language)}
           </Text>
         </View>
       </View>
@@ -166,9 +167,7 @@ const ProductDetailScreen = () => {
           </Text>
 
           <Text className="text-2xl font-bold text-[#FE8C00] mb-4">
-            {t("product.pricePattern", {
-              price: Number(product.price).toLocaleString(),
-            })}
+            {formatCurrency(Number(product.price), i18n.language)}
           </Text>
 
           <View className="flex-row items-center justify-between mb-6">

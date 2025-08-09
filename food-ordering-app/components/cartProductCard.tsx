@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { CartItem } from "@/type";
 import { useTranslation } from "react-i18next";
+import formatCurrency from "@/utils/currency";
 
 interface ProductCardProps {
   item: CartItem;
@@ -19,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   decrementQuantity,
   onTrack,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <View className="flex-row items-center border border-gray-200 bg-white rounded-lg p-4 mb-4 shadow-sm">
       <Image
@@ -33,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {t(`products.${item.id}.title`, { defaultValue: item.title })}
         </Text>
         <Text className="text-[#FE8C00] font-semibold text-base mb-2">
-          ${item.price.toLocaleString()}
+          {formatCurrency(item.price, i18n.language)}
         </Text>
 
         {item.status === "delivering" ? (

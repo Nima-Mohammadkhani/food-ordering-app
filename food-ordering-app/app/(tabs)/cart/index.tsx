@@ -16,6 +16,7 @@ import { createOrderFromCart } from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
 import { RootState } from "@/type";
 import { useTranslation } from "react-i18next";
+import formatCurrency from "@/utils/currency";
 
 const CartScreen = () => {
   const productCartList = useSelector(
@@ -25,7 +26,7 @@ const CartScreen = () => {
   const router = useRouter();
   const [promo, setPromo] = useState<string>("");
   const [discountPercent, setDiscountPercent] = useState<number>(0);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const removeFromCart = async (productId: number) => {
     await dispatch(removeItemFromCart(productId));
@@ -132,7 +133,7 @@ const CartScreen = () => {
             <View className="flex-row justify-between items-center">
               <Text className="text-gray-600">{t("cart.subtotal")}</Text>
               <Text className="font-bold text-gray-900">
-                {t("product.pricePattern", { price: subtotal.toFixed(2) })}
+                {formatCurrency(Number(subtotal.toFixed(2)), i18n.language)}
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
@@ -142,9 +143,10 @@ const CartScreen = () => {
             <View className="flex-row justify-between items-center">
               <Text className="text-gray-600">{t("cart.discount")}</Text>
               <Text className="font-bold text-[#FE8C00]">
-                {t("cart.discountAmountPattern", {
-                  amount: discountAmount.toFixed(2),
-                })}
+                {formatCurrency(
+                  Number((-discountAmount).toFixed(2)),
+                  i18n.language
+                )}
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
@@ -152,7 +154,7 @@ const CartScreen = () => {
                 {t("cart.total")}
               </Text>
               <Text className="font-bold text-xl text-gray-900">
-                {t("product.pricePattern", { price: totalPrice.toFixed(2) })}
+                {formatCurrency(Number(totalPrice.toFixed(2)), i18n.language)}
               </Text>
             </View>
             <Button
