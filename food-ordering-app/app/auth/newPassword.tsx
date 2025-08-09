@@ -15,10 +15,12 @@ import {
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 const NewPassword = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />

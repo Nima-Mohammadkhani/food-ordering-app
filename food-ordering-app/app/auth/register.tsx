@@ -13,7 +13,9 @@ import {
 } from "react-native";
 import Toast from "react-native-toast-message";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 const Register = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
@@ -30,22 +32,30 @@ const Register = () => {
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
         <View className="mb-6">
-          <Text className="text-4xl font-bold text-black">Create your new</Text>
-          <Text className="text-4xl font-bold text-black mb-2">account.</Text>
+          <Text className="text-4xl font-bold text-black">
+            {t("auth.createYourNewAccount")}
+          </Text>
+          <Text className="text-4xl font-bold text-black mb-2">
+            {t("auth.account")}
+          </Text>
           <Text className="text-base text-gray-500">
-            Create an account to start looking for the food you like
+            {t("auth.createAccountSubtitle")}
           </Text>
         </View>
 
         <View className="gap-4">
-          <Input label="Email Address" value={email} onChangeText={setEmail} />
           <Input
-            label="User Name"
+            label={t("auth.email")}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            label={t("auth.username")}
             value={userName}
             onChangeText={setUserName}
           />
           <Input
-            label="Password"
+            label={t("auth.password")}
             secureToggle
             secureTextEntry
             value={password}
@@ -64,13 +74,14 @@ const Register = () => {
               />
             </TouchableOpacity>
             <Text className="text-right">
-              I Agree with{" "}
-              <Text className="text-[#FE8C00]">Terms of Service</Text> and{" "}
-              <Text className="text-[#FE8C00]">Privacy Policy</Text>
+              {t("auth.iAgreeWith")}
+              <Text className="text-[#FE8C00]">{t("auth.termsOfService")}</Text>{" "}
+              {t("auth.and")}{" "}
+              <Text className="text-[#FE8C00]">{t("auth.privacyPolicy")}</Text>
             </Text>
           </View>
           <Button
-            title="Register"
+            title={t("auth.register")}
             size="md"
             textClassName="text-white"
             disabled={!(email && userName && password && checked)}
@@ -82,7 +93,7 @@ const Register = () => {
         <View className="flex-row items-center">
           <View className="flex-1 h-px bg-neutral-300" />
           <Text className="mx-4 text-neutral-500 text-sm">
-            Or Register with
+            {t("auth.orRegisterWith")}
           </Text>
           <View className="flex-1 h-px bg-neutral-300" />
         </View>

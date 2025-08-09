@@ -12,15 +12,15 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 const Otp = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
   const router = useRouter();
-  const inputs = useRef([]);
+  const inputs = useRef<Array<TextInput | null>>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -29,12 +29,12 @@ const Otp = () => {
     return () => clearInterval(countdown);
   }, []);
 
-  const handleChange = (text, index) => {
+  const handleChange = (text: string, index: number) => {
     const newOtp = [...otp];
     newOtp[index] = text;
     setOtp(newOtp);
     if (text && index < inputs.current.length - 1) {
-      inputs.current[index + 1].focus();
+      inputs.current[index + 1]?.focus();
     }
   };
 
@@ -51,11 +51,10 @@ const Otp = () => {
           <View className="flex-1 justify-center gap-6">
             <View>
               <Text className="text-4xl font-bold text-black mb-2">
-                Email verification
+                {t("auth.emailVerification")}
               </Text>
               <Text className="text-base text-gray-500">
-                Enter the verification code we send you on:
-                Alberts******@gmail.com|
+                {t("auth.enterCodeInfo")}
               </Text>
             </View>
 
@@ -63,7 +62,9 @@ const Otp = () => {
               {otp.map((value, index) => (
                 <TextInput
                   key={index}
-                  ref={(ref) => (inputs.current[index] = ref)}
+                  ref={(ref) => {
+                    inputs.current[index] = ref;
+                  }}
                   value={value}
                   onChangeText={(text) => handleChange(text, index)}
                   keyboardType="number-pad"
@@ -75,8 +76,8 @@ const Otp = () => {
 
             <View className="flex justify-center items-center gap-4">
               <View className="flex flex-row">
-                <Text className="text-gray-500">Didn't receive code?</Text>
-                <Text className="text-[#FE8C00] ml-1 font-medium">Resend</Text>
+                <Text className="text-gray-500">{t("auth.didntReceiveCodeQuestion")}</Text>
+                <Text className="text-[#FE8C00] ml-1 font-medium">{t("auth.resend")}</Text>
               </View>
               <Text className="text-gray-500 text-base">
                 00:{timer < 10 ? `0${timer}` : timer}
@@ -91,7 +92,7 @@ const Otp = () => {
         >
           <View className="pb-6 pt-4">
             <Button
-              title="Continue"
+              title={t("auth.continue")}
               size="md"
               textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"

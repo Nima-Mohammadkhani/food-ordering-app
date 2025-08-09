@@ -15,7 +15,9 @@ import { Ionicons } from "@expo/vector-icons";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
   const router = useRouter();
 
@@ -44,17 +46,16 @@ const ForgotPassword = () => {
           <View className="flex-1 justify-center">
             <View className="mb-8">
               <Text className="text-4xl font-bold text-black mb-2">
-                Forgot password?
+                {t("auth.forgotPassword")}
               </Text>
               <Text className="text-base text-gray-500">
-                Enter your email address and we'll send you confirmation code to
-                reset your password
+                {t("auth.forgotPasswordSubtitle")}
               </Text>
             </View>
 
             <View>
               <Input
-                label="Email Address"
+                label={t("auth.emailAddress")}
                 value={email}
                 onChangeText={setEmail}
                 ref={inputRef}
@@ -73,7 +74,7 @@ const ForgotPassword = () => {
         >
           <View className="pb-6 pt-4">
             <Button
-              title="Continue"
+              title={t("auth.continue")}
               size="md"
               textClassName="text-white "
               className="bg-[#FE8C00] rounded-full"
