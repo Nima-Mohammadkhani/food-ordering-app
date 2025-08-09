@@ -15,7 +15,7 @@ import Toast from "react-native-toast-message";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 const Register = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
@@ -27,7 +27,6 @@ const Register = () => {
     Toast.show({
       type: "success",
       text1: t("auth.RegisterSuccess"),
-      text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
     });
     router.replace("/(tabs)");
   };
@@ -35,11 +34,7 @@ const Register = () => {
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
-        <View
-          className={`mb-6 flex  ${
-            i18n.language == "fa" ? "justify-end items-end w-full" : null
-          }`}
-        >
+        <View className="mb-6 flex">
           <Text className="text-4xl font-bold text-black">
             {t("auth.createYourNewAccount")}
           </Text>
@@ -70,9 +65,7 @@ const Register = () => {
             onChangeText={setPassword}
           />
           <View
-            className={`flex flex-row  ${
-              i18n.language == "fa" ? "flex-row-reverse gap-1" : null
-            }`}
+            className="flex flex-row"
           >
             <TouchableOpacity
               className="flex-row items-center gap-2"

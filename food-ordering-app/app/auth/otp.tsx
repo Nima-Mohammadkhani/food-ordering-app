@@ -20,7 +20,7 @@ const Otp = () => {
   const [timer, setTimer] = useState(60);
   const router = useRouter();
   const inputs = useRef<Array<TextInput | null>>([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -49,11 +49,7 @@ const Otp = () => {
           showsVerticalScrollIndicator={false}
         >
           <View className="flex-1 justify-center gap-6">
-            <View
-              className={`mb-6 flex  ${
-                i18n.language == "fa" ? "justify-end items-end w-full" : null
-              }`}
-            >
+            <View className="mb-6 flex">
               <Text className="text-4xl font-bold text-black mb-2">
                 {t("auth.emailVerification")}
               </Text>
@@ -79,11 +75,7 @@ const Otp = () => {
             </View>
 
             <View className="flex justify-center items-center gap-4">
-              <View
-                className={`${
-                  i18n.language == "fa" ? "flex-row-reverse " : "flex-row"
-                }  justify-center gap-1`}
-              >
+              <View className="justify-center gap-1">
                 <Text className="text-gray-500">
                   {t("auth.didntReceiveCodeQuestion")}
                 </Text>

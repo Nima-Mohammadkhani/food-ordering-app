@@ -26,21 +26,18 @@ const Login = () => {
         Toast.show({
           type: "success",
           text1: t("auth.loginSuccess"),
-          text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
         });
         router.replace("/(tabs)");
       } else {
         Toast.show({
           type: "error",
           text1: t("auth.invalidCredentials"),
-          text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
         });
       }
     } else {
       Toast.show({
         type: "error",
         text1: t("auth.registerFirst"),
-        text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
       });
     }
   };
@@ -51,7 +48,6 @@ const Login = () => {
       Toast.show({
         type: "error",
         text1: t("auth.registerFirst"),
-        text1Style: { textAlign: i18n.language === "fa" ? "right" : "left" },
       });
     }
   };
@@ -60,11 +56,7 @@ const Login = () => {
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
       <View className="flex-1 flex flex-col gap-8 px-6 justify-center">
-        <View
-          className={`mb-6 flex  ${
-            i18n.language == "fa" ? "justify-end items-end w-full" : null
-          }`}
-        >
+        <View className="mb-6 flex">
           <Text className="text-4xl font-bold text-black">
             {t("auth.loginTitle1")}
           </Text>
@@ -125,11 +117,7 @@ const Login = () => {
           </View>
         </View>
 
-        <View
-          className={`${
-            i18n.language == "fa" ? "flex-row-reverse " : "flex-row"
-          }  justify-center gap-1`}
-        >
+        <View className="flex-row justify-center gap-1">
           <Text>{t("auth.noAccountQuestion")}</Text>
           <Text
             onPress={() => router.push("/auth/register")}

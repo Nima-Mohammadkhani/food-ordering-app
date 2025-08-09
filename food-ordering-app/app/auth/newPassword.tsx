@@ -20,7 +20,7 @@ const NewPassword = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [password, setPassword] = useState<string | undefined>();
   const router = useRouter();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
@@ -32,11 +32,7 @@ const NewPassword = () => {
           showsVerticalScrollIndicator={false}
         >
           <View className="flex-1 justify-center gap-6">
-            <View
-              className={`${
-                i18n.language == "fa" ? "flex justify-end items-end" : null
-              }`}
-            >
+            <View>
               <Text className="text-4xl font-bold text-black mb-2">
                 {t("auth.resetTitle")}
               </Text>
