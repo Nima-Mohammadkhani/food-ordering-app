@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import * as Localization from "expo-localization";
-import { I18nManager } from "react-native";
+import { I18nManager, Platform, DevSettings } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import en from "./en.json";
@@ -20,14 +20,6 @@ const initialLanguage: SupportedLanguage = supportedLanguages.includes(
   ? (deviceLanguageCode as SupportedLanguage)
   : "en";
 
-if (initialLanguage === "fa") {
-  I18nManager.allowRTL(true);
-  I18nManager.forceRTL(true);
-} else {
-  I18nManager.allowRTL(false);
-  I18nManager.forceRTL(false);
-}
-
 i18n.use(initReactI18next).init({
   compatibilityJSON: "v4",
   resources: {
@@ -45,6 +37,16 @@ i18n.use(initReactI18next).init({
   try {
     const stored = await AsyncStorage.getItem("appLanguage");
     if (stored && supportedLanguages.includes(stored as SupportedLanguage)) {
+      const enableRtl = stored === "fa";
+      if (I18nManager.isRTL !== enableRtl) {
+        I18nManager.allowRTL(enableRtl);
+        I18nManager.forceRTL(enableRtl);
+        if (Platform.OS === "web") {
+          window?.location?.reload?.();
+        } else {
+          DevSettings.reload();
+        }
+      }
       i18n.changeLanguage(stored);
     }
   } catch {}
