@@ -14,12 +14,16 @@ import { Product, RootState } from "@/type";
 
 const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const productList = useSelector((state: RootState) => state.product.productList);
+  const productList = useSelector(
+    (state: RootState) => state.product.productList
+  );
 
   const filteredProducts =
     selectedCategory === "all"
       ? productList
-      : productList.filter((product) => product.category === selectedCategory);
+      : productList.filter(
+          (product) => product.category?.toLowerCase() === selectedCategory
+        );
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);

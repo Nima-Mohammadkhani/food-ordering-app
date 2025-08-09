@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "@/redux/slice/product";
 import Toast from "react-native-toast-message";
 import { Product, RootState } from "@/type";
+import { useTranslation } from "react-i18next";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -33,6 +34,7 @@ const ProductDetailScreen = () => {
     (state: RootState) => state.product.productList
   );
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const product = productList.find(
     (p: Product) => p.id === parseInt(id as string)
@@ -50,7 +52,7 @@ const ProductDetailScreen = () => {
   if (!product) {
     return (
       <SafeAreaView className="flex-1 bg-white justify-center items-center">
-        <Text className="text-lg text-gray-600">Product not found</Text>
+        <Text className="text-lg text-gray-600">{t("product.notFound")}</Text>
       </SafeAreaView>
     );
   }
@@ -65,7 +67,7 @@ const ProductDetailScreen = () => {
 
   const handleAddToCart = async () => {
     await dispatch(addItemToCart(product));
-    Toast.show({ type: "success", text1: "Added to cart" });
+    Toast.show({ type: "success", text1: t("product.addedToCartSuccess") });
   };
 
   const handleProductPress = (productId: number) => {
@@ -90,7 +92,7 @@ const ProductDetailScreen = () => {
 
       <View className="p-2">
         <Text className="font-semibold text-sm text-gray-800" numberOfLines={1}>
-          {item.title}
+          {t(`products.${item.id}.title`, { defaultValue: item.title })}
         </Text>
 
         <View className="flex-row justify-between items-center mt-1">
@@ -101,7 +103,7 @@ const ProductDetailScreen = () => {
             </Text>
           </View>
           <Text className="text-[#FE8C00] font-bold text-sm">
-            ${item.price.toFixed(2)}
+            {t("product.pricePattern", { price: item.price.toFixed(2) })}
           </Text>
         </View>
       </View>
@@ -122,7 +124,11 @@ const ProductDetailScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <StatusBar hidden />
-      <Header title={product.title} />
+      <Header
+        title={t(`products.${product.id}.title`, {
+          defaultValue: product.title,
+        })}
+      />
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
         <View className="px-4 mt-4">
           <View className="relative rounded-2xl overflow-hidden">
@@ -149,25 +155,28 @@ const ProductDetailScreen = () => {
 
         <View className="px-4 mt-6">
           <Text className="text-2xl font-bold text-gray-800 mb-2">
-            {product.title} 🍔
+            {t(`products.${product.id}.title`, { defaultValue: product.title })}{" "}
+            🍔
           </Text>
 
           <Text className="text-2xl font-bold text-[#FE8C00] mb-4">
-            $ {Number(product.price).toLocaleString()}
+            {t("product.pricePattern", {
+              price: Number(product.price).toLocaleString(),
+            })}
           </Text>
 
           <View className="flex-row items-center justify-between mb-6">
             <View className="flex-row items-center bg-orange-50 px-3 py-2 rounded-lg">
               <Ionicons name="bicycle-outline" size={16} color="#FE8C00" />
               <Text className="text-[#FE8C00] font-medium ml-1 text-sm">
-                Free Delivery
+                {t("product.freeDelivery")}
               </Text>
             </View>
 
             <View className="flex-row items-center bg-orange-50 px-3 py-2 rounded-lg">
               <Ionicons name="time-outline" size={16} color="#FE8C00" />
               <Text className="text-[#FE8C00] font-medium ml-1 text-sm">
-                20 - 30
+                20 - 30 {t("product.minutesUnit")}
               </Text>
             </View>
 
@@ -181,23 +190,25 @@ const ProductDetailScreen = () => {
 
           <View className="mb-6">
             <Text className="text-lg font-semibold text-gray-800 mb-3">
-              Description
+              {t("product.descriptionTitle")}
             </Text>
             <Text className="text-gray-600 leading-6">
-              {product.description}
+              {t(`products.${product.id}.description`, {
+                defaultValue: product.description || "",
+              })}
             </Text>
           </View>
 
           <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-semibold text-gray-800">
-              Recommended For You
+              {t("product.recommendedTitle")}
             </Text>
             <Pressable>
               <Text
                 className="text-[#FE8C00] font-medium"
                 onPress={() => router.replace("/(tabs)")}
               >
-                See All
+                {t("home.seeAll")}
               </Text>
             </Pressable>
           </View>
@@ -231,7 +242,7 @@ const ProductDetailScreen = () => {
 
       <View className="bg-white border-t border-gray-100 px-4 py-4">
         <Button
-          title="Add to Cart"
+          title={t("product.addToCart")}
           onPress={handleAddToCart}
           className="bg-[#FE8C00] rounded-2xl"
           textClassName="text-white font-semibold text-base"

@@ -7,29 +7,96 @@
   },
   "product": {
     "distanceUnit": "m",
-    "pricePattern": "$ {{price}}"
+    "pricePattern": "$ {{price}}",
+    "freeDelivery": "Free Delivery",
+    "minutesUnit": "min",
+    "descriptionTitle": "Description",
+    "recommendedTitle": "Recommended For You",
+    "addToCart": "Add to Cart",
+    "addedToCartSuccess": "Added to cart",
+    "notFound": "Product not found"
   },
   "products": {
-    "1": { "title": "Pepperoni Pizza" },
-    "2": { "title": "Cheeseburger Deluxe" },
-    "3": { "title": "French Fries" },
-    "4": { "title": "Grilled Chicken Sandwich" },
-    "5": { "title": "Caesar Salad" },
-    "6": { "title": "BBQ Chicken Wings" },
-    "7": { "title": "Vanilla Milkshake" },
-    "8": { "title": "Margarita Pizza" },
-    "9": { "title": "Chicken Nuggets" },
-    "10": { "title": "Chocolate Sundae" },
-    "11": { "title": "Spicy Chicken Burger" },
-    "12": { "title": "Onion Rings" },
-    "13": { "title": "Iced Tea" },
-    "14": { "title": "Fish Sandwich" },
-    "15": { "title": "Mozzarella Sticks" },
-    "16": { "title": "Grilled Chicken Wrap" },
-    "17": { "title": "Taco Trio" },
-    "18": { "title": "Strawberry Smoothie" },
-    "19": { "title": "Bacon Cheeseburger" },
-    "20": { "title": "Chocolate Chip Cookies" }
+    "1": {
+      "title": "Pepperoni Pizza",
+      "description": "A classic pepperoni pizza topped with generous slices of spicy pepperoni, gooey mozzarella cheese, and our signature tomato sauce. Perfectly baked for a crispy crust and rich flavor. Ideal for meat lovers looking for a satisfying meal."
+    },
+    "2": {
+      "title": "Cheeseburger Deluxe",
+      "description": "A juicy cheeseburger with melted cheddar cheese, fresh lettuce, tomato slices, and our special sauce on a toasted bun. Perfect for a quick and tasty meal any time of the day."
+    },
+    "3": {
+      "title": "French Fries",
+      "description": "Golden and crispy French fries, lightly salted and served hot. The perfect side dish to complement any burger or sandwich in our menu."
+    },
+    "4": {
+      "title": "Grilled Chicken Sandwich",
+      "description": "Tender grilled chicken breast served on a toasted bun with fresh lettuce, tomato, and mayo. A healthy and delicious sandwich option."
+    },
+    "5": {
+      "title": "Caesar Salad",
+      "description": "Fresh romaine lettuce tossed with Caesar dressing, croutons, and grated parmesan cheese. A light and tasty option for a healthier choice."
+    },
+    "6": {
+      "title": "BBQ Chicken Wings",
+      "description": "Tender chicken wings glazed with smoky BBQ sauce, served hot and ready to enjoy. A perfect starter or snack for wing lovers."
+    },
+    "7": {
+      "title": "Vanilla Milkshake",
+      "description": "Creamy vanilla milkshake made with real vanilla ice cream and topped with whipped cream. A sweet treat to finish your meal."
+    },
+    "8": {
+      "title": "Margarita Pizza",
+      "description": "Classic Margarita pizza with fresh tomatoes, mozzarella cheese, basil leaves, and a touch of olive oil baked to perfection."
+    },
+    "9": {
+      "title": "Chicken Nuggets",
+      "description": "Crispy golden chicken nuggets served with your choice of dipping sauces. Perfect as a snack or Sandwich."
+    },
+    "10": {
+      "title": "Chocolate Sundae",
+      "description": "Decadent chocolate sundae topped with chocolate syrup, nuts, and whipped cream. A delightful dessert to satisfy your sweet tooth."
+    },
+    "11": {
+      "title": "Spicy Chicken Burger",
+      "description": "A spicy chicken burger with crispy fried chicken fillet, lettuce, tomato, and spicy mayo sauce in a toasted bun."
+    },
+    "12": {
+      "title": "Onion Rings",
+      "description": "Crunchy onion rings battered and fried to a golden brown. A tasty side dish to accompany any meal."
+    },
+    "13": {
+      "title": "Iced Tea",
+      "description": "Refreshing iced tea brewed fresh and served chilled. A perfect drink for hot days."
+    },
+    "14": {
+      "title": "Fish Sandwich",
+      "description": "Breaded fish fillet sandwich with lettuce, tomato, and tartar sauce on a soft bun. A seafood favorite."
+    },
+    "15": {
+      "title": "Mozzarella Sticks",
+      "description": "Cheesy mozzarella sticks breaded and fried to golden perfection. Served with marinara sauce for dipping."
+    },
+    "16": {
+      "title": "Grilled Chicken Wrap",
+      "description": "A delicious grilled chicken wrap with fresh veggies and a tangy sauce wrapped in a soft tortilla."
+    },
+    "17": {
+      "title": "Taco Trio",
+      "description": "Three soft tacos filled with seasoned meat, lettuce, cheese, and salsa. Perfect for sharing or a quick meal."
+    },
+    "18": {
+      "title": "Strawberry Smoothie",
+      "description": "A refreshing strawberry smoothie made with fresh strawberries and yogurt. A healthy and tasty beverage."
+    },
+    "19": {
+      "title": "Bacon Cheeseburger",
+      "description": "A bacon cheeseburger featuring crispy bacon, melted cheese, lettuce, and tomato on a toasted bun. A hearty favorite."
+    },
+    "20": {
+      "title": "Chocolate Chip Cookies",
+      "description": "Freshly baked chocolate chip cookies with a gooey center and crispy edges. A perfect sweet snack or dessert."
+    }
   },
   "home": {
     "yourLocation": "Your Location",
@@ -119,6 +186,7 @@
     "orRegisterWith": "Or Register with",
     "registerSuccess": "Register success",
     "emailAddress": "Email Address",
+    "and": "and",
     "onboarding": {
       "1": {
         "title": "Discover top restaurants near you",
